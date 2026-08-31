@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LUMEN Lab — Interactive Science Tools | Spectrum Calculator, Color Tools & More</title>
+    <meta name="description" content="Explore LUMEN Lab's free interactive science tools: Spectrum Calculator, Color Palette Generator, Light Refraction Simulator, and more. Learn about light, color, and physics.">
+    <meta name="keywords" content="spectrum calculator, color palette generator, light refraction simulator, physics tools, interactive science, light tools, color tools">
+    <meta name="author" content="LUMEN">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="LUMEN Lab — Interactive Science Tools">
+    <meta property="og:description" content="Free interactive science tools: Spectrum Calculator, Color Palette Generator, Light Refraction Simulator, and more.">
+    <meta property="og:url" content="https://hongliichun671-lgtm.github.io/lumen-experience/tools.html">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "LUMEN Lab — Interactive Science Tools",
+        "url": "https://hongliichun671-lgtm.github.io/lumen-experience/tools.html",
+        "description": "Free interactive science tools: Spectrum Calculator, Color Palette Generator, Light Refraction Simulator, and more."
+    }
+    </script>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3CradialGradient id='g' cx='50%25' cy='50%25' r='50%25'%3E%3Cstop offset='0%25' stop-color='%23ffffff'/%3E%3Cstop offset='100%25' stop-color='%23000000'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='16' cy='16' r='14' fill='url(%23g)'/%3E%3C/svg%3E">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@200;300;400;500&family=Noto+Sans+Khmer:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/tools.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <div class="nav-logo">
+            <span class="nav-logo-dot"></span>
+            <span class="nav-logo-text">LUMEN</span>
+        </div>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="tools.html" class="nav-link active">Tools</a>
+            <a href="articles.html" class="nav-link">Articles</a>
+            <a href="about.html" class="nav-link">About</a>
+            <a href="contact.html" class="nav-link">Contact</a>
+        </div>
+        <div class="nav-controls">
+            <button class="lang-btn active" data-lang="en" aria-label="English">EN</button>
+            <button class="lang-btn" data-lang="km" aria-label="ភាសាខ្មែរ">ខ្មែរ</button>
+        </div>
+    </nav>
+
+    <main class="tools-main">
+        <div class="tools-hero">
+            <div class="tools-hero-badge">LUMEN LAB</div>
+            <h1 class="tools-hero-title">Interactive Science Tools</h1>
+            <p class="tools-hero-desc">Free tools to explore the physics of light, color, and perception. Learn by doing.</p>
+        </div>
+
+        <!-- Tool 1: Spectrum Calculator -->
+        <section class="tool-section" id="spectrum-calculator">
+            <div class="tool-header">
+                <span class="tool-number">01</span>
+                <h2 class="tool-title">Spectrum Calculator</h2>
+                <p class="tool-desc">Enter a wavelength (nm) to see the corresponding color of light.</p>
+            </div>
+            <div class="tool-card">
+                <div class="spectrum-calc">
+                    <div class="calc-input-group">
+                        <label for="wavelengthInput">Wavelength (nm)</label>
+                        <input type="range" id="wavelengthInput" min="380" max="750" value="550" step="1">
+                        <div class="calc-value-display">
+                            <span id="wavelengthValue">550</span> nm
+                        </div>
+                    </div>
+                    <div class="calc-color-preview" id="calcColorPreview"></div>
+                    <div class="calc-info">
+                        <div class="calc-info-item">
+                            <span class="calc-info-label">Color Name</span>
+                            <span class="calc-info-value" id="calcColorName">Green</span>
+                        </div>
+                        <div class="calc-info-item">
+                            <span class="calc-info-label">Frequency</span>
+                            <span class="calc-info-value" id="calcFrequency">545 THz</span>
+                        </div>
+                        <div class="calc-info-item">
+                            <span class="calc-info-label">Hex Code</span>
+                            <span class="calc-info-value" id="calcHex">#00ff44</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tool 2: Color Palette Generator -->
+        <section class="tool-section" id="color-palette">
+            <div class="tool-header">
+                <span class="tool-number">02</span>
+                <h2 class="tool-title">Color Palette Generator</h2>
+                <p class="tool-desc">Generate harmonious color palettes inspired by light and nature.</p>
+            </div>
+            <div class="tool-card">
+                <div class="palette-generator">
+                    <div class="palette-controls">
+                        <button class="palette-btn" id="generatePalette">Generate Palette</button>
+                        <button class="palette-btn secondary" id="copyPalette">Copy Hex Codes</button>
+                    </div>
+                    <div class="palette-display" id="paletteDisplay">
+                        <div class="palette-color" style="background:#ff0000"><span>#ff0000</span></div>
+                        <div class="palette-color" style="background:#ff8800"><span>#ff8800</span></div>
+                        <div class="palette-color" style="background:#ffee00"><span>#ffee00</span></div>
+                        <div class="palette-color" style="background:#00ff44"><span>#00ff44</span></div>
+                        <div class="palette-color" style="background:#00aaff"><span>#00aaff</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tool 3: Light Refraction Simulator -->
+        <section class="tool-section" id="refraction-simulator">
+            <div class="tool-header">
+                <span class="tool-number">03</span>
+                <h2 class="tool-title">Light Refraction Simulator</h2>
+                <p class="tool-desc">See how light bends when passing through different materials.</p>
+            </div>
+            <div class="tool-card">
+                <div class="refraction-sim">
+                    <canvas id="refractionCanvas" width="600" height="400"></canvas>
+                    <div class="refraction-controls">
+                        <label for="refractionIndex">Refractive Index</label>
+                        <input type="range" id="refractionIndex" min="1" max="2.5" value="1.5" step="0.01">
+                        <span id="refractionIndexValue">1.50</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tool 4: Ambient Sound Generator -->
+        <section class="tool-section" id="ambient-sound">
+            <div class="tool-header">
+                <span class="tool-number">04</span>
+                <h2 class="tool-title">Ambient Sound Generator</h2>
+                <p class="tool-desc">Create relaxing ambient sounds for meditation, focus, or sleep.</p>
+            </div>
+            <div class="tool-card">
+                <div class="ambient-sound">
+                    <div class="ambient-controls">
+                        <button class="ambient-btn" id="ambientPlay">▶ Play</button>
+                        <button class="ambient-btn secondary" id="ambientStop">■ Stop</button>
+                    </div>
+                    <div class="ambient-sliders">
+                        <div class="ambient-slider-group">
+                            <label>Low Frequency</label>
+                            <input type="range" id="ambientLow" min="0" max="100" value="50">
+                        </div>
+                        <div class="ambient-slider-group">
+                            <label>Mid Frequency</label>
+                            <input type="range" id="ambientMid" min="0" max="100" value="30">
+                        </div>
+                        <div class="ambient-slider-group">
+                            <label>High Frequency</label>
+                            <input type="range" id="ambientHigh" min="0" max="100" value="20">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <span class="nav-logo-dot"></span>
+                <span>LUMEN</span>
+            </div>
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="tools.html">Tools</a>
+                <a href="articles.html">Articles</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+                <a href="privacy.html">Privacy Policy</a>
+            </div>
+            <div class="footer-copy">© 2026 LUMEN. All rights reserved.</div>
+        </div>
+    </footer>
+
+    <script src="js/tools.js"></script>
+</body>
+</html>
