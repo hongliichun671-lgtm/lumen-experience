@@ -19,7 +19,7 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@200;300;400;500&family=Noto+Sans+Khmer:wght@300;400;500;600&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="css/styles.css">
 </head>
@@ -29,7 +29,7 @@
         <div class="preloader-inner">
             <div class="preloader-ring"></div>
             <div class="preloader-text">LUMEN</div>
-            <div class="preloader-sub">Awakening...</div>
+            <div class="preloader-sub" data-i18n="preloaderSub">Awakening...</div>
         </div>
     </div>
 
@@ -44,10 +44,17 @@
             <span class="nav-logo-text">LUMEN</span>
         </div>
         <div class="nav-links">
-            <a href="#origin" class="nav-link" data-scroll>Origin</a>
-            <a href="#spectrum" class="nav-link" data-scroll>Spectrum</a>
-            <a href="#consciousness" class="nav-link" data-scroll>Consciousness</a>
-            <a href="#transcend" class="nav-link" data-scroll>Transcend</a>
+            <a href="#origin" class="nav-link" data-scroll data-i18n="navOrigin">Origin</a>
+            <a href="#spectrum" class="nav-link" data-scroll data-i18n="navSpectrum">Spectrum</a>
+            <a href="#consciousness" class="nav-link" data-scroll data-i18n="navConsciousness">Consciousness</a>
+            <a href="#transcend" class="nav-link" data-scroll data-i18n="navTranscend">Transcend</a>
+        </div>
+        <div class="nav-controls">
+            <button class="lang-btn active" data-lang="en" aria-label="English">EN</button>
+            <button class="lang-btn" data-lang="km" aria-label="ភាសាខ្មែរ">ខ្មែរ</button>
+            <button class="audio-btn" id="audioToggle" aria-label="Toggle audio">
+                <span class="audio-icon">♪</span>
+            </button>
         </div>
         <div class="nav-progress">
             <div class="nav-progress-bar" id="navProgress"></div>
@@ -64,19 +71,19 @@
             <div class="scene-content">
                 <div class="origin-badge">
                     <span class="origin-badge-dot"></span>
-                    <span>An Interactive Experience</span>
+                    <span data-i18n="originBadge">An Interactive Experience</span>
                 </div>
                 <h1 class="origin-title">
                     <span class="title-line title-line-1">LUMEN</span>
                     <span class="title-line title-line-2">A Journey</span>
                     <span class="title-line title-line-3">Through Light</span>
                 </h1>
-                <p class="origin-subtitle">
+                <p class="origin-subtitle" data-i18n="originSubtitle">
                     Scroll to begin your descent into the luminous depths of perception.
                 </p>
                 <div class="scroll-indicator">
                     <div class="scroll-line"></div>
-                    <span>Scroll</span>
+                    <span data-i18n="scroll">Scroll</span>
                 </div>
             </div>
         </section>
@@ -84,9 +91,9 @@
         <!-- Scene 2: The Spectrum -->
         <section class="scene scene-spectrum" id="spectrum">
             <div class="scene-content">
-                <div class="section-label">01 — The Spectrum</div>
-                <h2 class="section-title">Every color is a <span class="accent">frequency</span> of light.</h2>
-                <p class="section-desc">
+                <div class="section-label" data-i18n="spectrumLabel">01 — The Spectrum</div>
+                <h2 class="section-title" data-i18n="spectrumTitle">Every color is a <span class="accent">frequency</span> of light.</h2>
+                <p class="section-desc" data-i18n="spectrumDesc">
                     What you perceive as color is merely your mind interpreting electromagnetic waves. 
                     Move through the spectrum and discover what lies beyond the visible.
                 </p>
@@ -141,9 +148,9 @@
         <!-- Scene 3: Consciousness -->
         <section class="scene scene-consciousness" id="consciousness">
             <div class="scene-content">
-                <div class="section-label">02 — Consciousness</div>
-                <h2 class="section-title">The mind is a <span class="accent">luminous</span> field.</h2>
-                <p class="section-desc">
+                <div class="section-label" data-i18n="consciousnessLabel">02 — Consciousness</div>
+                <h2 class="section-title" data-i18n="consciousnessTitle">The mind is a <span class="accent">luminous</span> field.</h2>
+                <p class="section-desc" data-i18n="consciousnessDesc">
                     Your consciousness is not a thing, but a process — a continuous flow of perception, 
                     thought, and awareness. Interact with the field below.
                 </p>
@@ -151,7 +158,7 @@
                 <div class="consciousness-field" id="consciousnessField">
                     <div class="field-orb" id="fieldOrb"></div>
                     <div class="field-ripple" id="fieldRipple"></div>
-                    <div class="field-label">Touch the field</div>
+                    <div class="field-label" data-i18n="fieldLabel">Touch the field</div>
                 </div>
                 
                 <div class="consciousness-stats">
@@ -174,9 +181,9 @@
         <!-- Scene 4: Transcendence -->
         <section class="scene scene-transcend" id="transcend">
             <div class="scene-content">
-                <div class="section-label">03 — Transcendence</div>
-                <h2 class="section-title">Beyond the <span class="accent">visible</span>.</h2>
-                <p class="section-desc">
+                <div class="section-label" data-i18n="transcendLabel">03 — Transcendence</div>
+                <h2 class="section-title" data-i18n="transcendTitle">Beyond the <span class="accent">visible</span>.</h2>
+                <p class="section-desc" data-i18n="transcendDesc">
                     There is a universe beyond what your eyes can see. 
                     A spectrum of light that exists outside your perception.
                 </p>
@@ -201,19 +208,19 @@
         <section class="scene scene-final" id="final">
             <div class="scene-content">
                 <div class="final-glow"></div>
-                <h2 class="final-title">You have seen the light.</h2>
-                <p class="final-subtitle">
+                <h2 class="final-title" data-i18n="finalTitle">You have seen the light.</h2>
+                <p class="final-subtitle" data-i18n="finalSubtitle">
                     LUMEN is an exploration of perception, consciousness, and the infinite spectrum of existence.
                 </p>
                 <div class="final-actions">
                     <a href="#origin" class="btn-magnetic" data-scroll>
-                        <span>Return to Origin</span>
+                        <span data-i18n="returnOrigin">Return to Origin</span>
                     </a>
                 </div>
                 <div class="final-footer">
                     <span>LUMEN</span>
                     <span class="final-divider">·</span>
-                    <span>An Interactive Experience</span>
+                    <span data-i18n="finalFooter">An Interactive Experience</span>
                     <span class="final-divider">·</span>
                     <span>2026</span>
                 </div>
