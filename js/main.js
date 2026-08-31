@@ -7,6 +7,97 @@
     'use strict';
 
     // ============================================
+    // Language Support (EN/KM)
+    // ============================================
+    const translations = {
+        en: {
+            preloaderSub: 'Awakening...',
+            navOrigin: 'Origin',
+            navSpectrum: 'Spectrum',
+            navConsciousness: 'Consciousness',
+            navTranscend: 'Transcend',
+            originBadge: 'An Interactive Experience',
+            originSubtitle: 'Scroll to begin your descent into the luminous depths of perception.',
+            scroll: 'Scroll',
+            spectrumLabel: '01 — The Spectrum',
+            spectrumTitle: 'Every color is a frequency of light.',
+            spectrumDesc: 'What you perceive as color is merely your mind interpreting electromagnetic waves. Move through the spectrum and discover what lies beyond the visible.',
+            consciousnessLabel: '02 — Consciousness',
+            consciousnessTitle: 'The mind is a luminous field.',
+            consciousnessDesc: 'Your consciousness is not a thing, but a process — a continuous flow of perception, thought, and awareness. Interact with the field below.',
+            fieldLabel: 'Touch the field',
+            transcendLabel: '03 — Transcendence',
+            transcendTitle: 'Beyond the visible.',
+            transcendDesc: 'There is a universe beyond what your eyes can see. A spectrum of light that exists outside your perception.',
+            finalTitle: 'You have seen the light.',
+            finalSubtitle: 'LUMEN is an exploration of perception, consciousness, and the infinite spectrum of existence.',
+            returnOrigin: 'Return to Origin',
+            finalFooter: 'An Interactive Experience'
+        },
+        km: {
+            preloaderSub: 'កំពុងភ្ញាក់...',
+            navOrigin: 'ប្រភព',
+            navSpectrum: 'វិសាលគម',
+            navConsciousness: 'មនសិការ',
+            navTranscend: 'ឆ្លងផុត',
+            originBadge: 'បទពិសោធន៍អន្តរកម្ម',
+            originSubtitle: 'រមូរដើម្បីចាប់ផ្តើមដំណើរចូលទៅក្នុងជម្រៅដ៏ភ្លឺស្វាងនៃការយល់ឃើញ។',
+            scroll: 'រមូរ',
+            spectrumLabel: '០១ — វិសាលគម',
+            spectrumTitle: 'ពណ៌នីមួយៗគឺជាប្រេកង់នៃពន្លឺ។',
+            spectrumDesc: 'អ្វីដែលអ្នកយល់ឃើញថាជាពណ៌ គឺគ្រាន់តែជាការបកស្រាយរលកអេឡិចត្រូម៉ាញ៉េទិចដោយគំនិតរបស់អ្នកប៉ុណ្ណោះ។ ផ្លាស់ទីតាមវិសាលគម ហើយស្វែងរកអ្វីដែលនៅហួសពីអ្វីដែលអាចមើលឃើញ។',
+            consciousnessLabel: '០២ — មនសិការ',
+            consciousnessTitle: 'គំនិតគឺជាវាលដ៏ភ្លឺស្វាង។',
+            consciousnessDesc: 'មនសិការរបស់អ្នកមិនមែនជាវត្ថុទេ ប៉ុន្តែជាដំណើរការ — លំហូរបន្តនៃការយល់ឃើញ ការគិត និងការដឹងខ្លួន។ ធ្វើអន្តរកម្មជាមួយវាលខាងក្រោម។',
+            fieldLabel: 'ប៉ះវាល',
+            transcendLabel: '០៣ — ឆ្លងផុត',
+            transcendTitle: 'ហួសពីអ្វីដែលអាចមើលឃើញ។',
+            transcendDesc: 'មានសកលលោកមួយហួសពីអ្វីដែលភ្នែករបស់អ្នកអាចមើលឃើញ។ វិសាលគមនៃពន្លឺដែលមាននៅខាងក្រៅការយល់ឃើញរបស់អ្នក។',
+            finalTitle: 'អ្នកបានឃើញពន្លឺហើយ។',
+            finalSubtitle: 'LUMEN គឺជាការស្វែងយល់អំពីការយល់ឃើញ មនសិការ និងវិសាលគមគ្មានកំណត់នៃអត្ថិភាព។',
+            returnOrigin: 'ត្រឡប់ទៅប្រភព',
+            finalFooter: 'បទពិសោធន៍អន្តរកម្ម'
+        }
+    };
+
+    let currentLang = 'en';
+
+    function applyLanguage(lang) {
+        currentLang = lang;
+        const t = translations[lang];
+        
+        // Update all translatable elements
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.dataset.i18n;
+            if (t[key]) el.textContent = t[key];
+        });
+        
+        // Update document lang
+        document.documentElement.lang = lang;
+        
+        // Update language toggle buttons
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.lang === lang);
+        });
+        
+        // Save preference
+        localStorage.setItem('lumen-lang', lang);
+    }
+
+    // Language toggle
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            applyLanguage(btn.dataset.lang);
+        });
+    });
+
+    // Load saved language
+    const savedLang = localStorage.getItem('lumen-lang');
+    if (savedLang && translations[savedLang]) {
+        applyLanguage(savedLang);
+    }
+
+    // ============================================
     // Preloader
     // ============================================
     const preloader = document.getElementById('preloader');
@@ -71,7 +162,7 @@
         const docHeight = document.documentElement.scrollHeight - window.innerHeight;
         const progress = (scrollTop / docHeight) * 100;
         navProgress.style.width = progress + '%';
-    });
+    }, { passive: true });
 
     // Smooth scroll for nav links
     document.querySelectorAll('[data-scroll]').forEach(link => {
@@ -99,13 +190,36 @@
     scenes.forEach(scene => observer.observe(scene));
 
     // ============================================
-    // Particle Canvas
+    // Particle Canvas (Optimized)
     // ============================================
     const canvas = document.getElementById('particleCanvas');
     const ctx = canvas.getContext('2d');
     let particles = [];
     let animationId;
     let isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let scrollProgress = 0;
+    let resizeTimeout;
+
+    // Scroll-based color palette
+    const scrollColors = [
+        { r: 255, g: 255, b: 255 },   // White (Origin)
+        { r: 255, g: 136, b: 0 },     // Orange (Spectrum)
+        { r: 0, g: 170, b: 255 },     // Blue (Consciousness)
+        { r: 136, g: 0, b: 255 },     // Violet (Transcendence)
+        { r: 255, g: 255, b: 255 }    // White (Final)
+    ];
+
+    function getScrollColor(progress) {
+        const idx = Math.min(Math.floor(progress * (scrollColors.length - 1)), scrollColors.length - 2);
+        const t = progress * (scrollColors.length - 1) - idx;
+        const c1 = scrollColors[idx];
+        const c2 = scrollColors[idx + 1];
+        return {
+            r: Math.round(c1.r + (c2.r - c1.r) * t),
+            g: Math.round(c1.g + (c2.g - c1.g) * t),
+            b: Math.round(c1.b + (c2.b - c1.b) * t)
+        };
+    }
 
     function resizeCanvas() {
         canvas.width = window.innerWidth;
@@ -113,8 +227,19 @@
         initParticles();
     }
 
+    // Debounced resize
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(resizeCanvas, 150);
+    });
+
     function initParticles() {
-        const particleCount = Math.min(Math.floor(window.innerWidth / 8), 150);
+        // Optimized particle count based on device
+        const isMobile = window.innerWidth < 768;
+        const particleCount = isMobile
+            ? Math.min(Math.floor(window.innerWidth / 12), 80)
+            : Math.min(Math.floor(window.innerWidth / 8), 120);
+        
         particles = [];
         for (let i = 0; i < particleCount; i++) {
             particles.push({
@@ -129,8 +254,19 @@
         }
     }
 
+    // Spatial grid optimization for connection lines
+    const CONNECTION_DIST = 100;
+    const GRID_CELL = CONNECTION_DIST;
+
     function drawParticles() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        const color = getScrollColor(scrollProgress);
+        
+        // Build spatial grid
+        const grid = {};
+        const cols = Math.ceil(canvas.width / GRID_CELL);
+        const rows = Math.ceil(canvas.height / GRID_CELL);
         
         particles.forEach(p => {
             p.x += p.speedX;
@@ -145,29 +281,46 @@
             
             const pulseOpacity = p.opacity * (0.7 + Math.sin(p.pulse) * 0.3);
             
+            // Draw particle with scroll color
             ctx.beginPath();
             ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(255, 255, 255, ${pulseOpacity})`;
+            ctx.fillStyle = `rgba(${color.r}, ${color.g}, ${color.b}, ${pulseOpacity})`;
             ctx.fill();
+            
+            // Add to grid
+            const gx = Math.floor(p.x / GRID_CELL);
+            const gy = Math.floor(p.y / GRID_CELL);
+            const key = gx + ',' + gy;
+            if (!grid[key]) grid[key] = [];
+            grid[key].push(p);
         });
         
-        // Draw connecting lines
-        for (let i = 0; i < particles.length; i++) {
-            for (let j = i + 1; j < particles.length; j++) {
-                const dx = particles[i].x - particles[j].x;
-                const dy = particles[i].y - particles[j].y;
-                const dist = Math.sqrt(dx * dx + dy * dy);
-                
-                if (dist < 100) {
-                    ctx.beginPath();
-                    ctx.moveTo(particles[i].x, particles[i].y);
-                    ctx.lineTo(particles[j].x, particles[j].y);
-                    ctx.strokeStyle = `rgba(255, 255, 255, ${0.08 * (1 - dist / 100)})`;
-                    ctx.lineWidth = 0.5;
-                    ctx.stroke();
+        // Draw connecting lines using spatial grid (O(n) instead of O(n²))
+        particles.forEach(p => {
+            const gx = Math.floor(p.x / GRID_CELL);
+            const gy = Math.floor(p.y / GRID_CELL);
+            
+            // Check neighboring cells
+            for (let dx = -1; dx <= 1; dx++) {
+                for (let dy = -1; dy <= 1; dy++) {
+                    const neighbors = grid[(gx + dx) + ',' + (gy + dy)];
+                    if (!neighbors) continue;
+                    
+                    neighbors.forEach(other => {
+                        if (other === p) return;
+                        const dist = Math.sqrt((p.x - other.x) ** 2 + (p.y - other.y) ** 2);
+                        if (dist < CONNECTION_DIST) {
+                            ctx.beginPath();
+                            ctx.moveTo(p.x, p.y);
+                            ctx.lineTo(other.x, other.y);
+                            ctx.strokeStyle = `rgba(${color.r}, ${color.g}, ${color.b}, ${0.08 * (1 - dist / CONNECTION_DIST)})`;
+                            ctx.lineWidth = 0.5;
+                            ctx.stroke();
+                        }
+                    });
                 }
             }
-        }
+        });
         
         animationId = requestAnimationFrame(drawParticles);
     }
@@ -175,8 +328,16 @@
     if (!isReducedMotion) {
         resizeCanvas();
         drawParticles();
-        window.addEventListener('resize', resizeCanvas);
     }
+
+    // ============================================
+    // Scroll Progress Tracking
+    // ============================================
+    window.addEventListener('scroll', () => {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        scrollProgress = docHeight > 0 ? scrollTop / docHeight : 0;
+    }, { passive: true });
 
     // ============================================
     // Spectrum Interaction
@@ -212,8 +373,129 @@
             // Update marker color
             spectrumMarker.style.background = color;
             spectrumMarker.style.boxShadow = `0 0 20px ${color}`;
+            
+            // Play sound for color
+            playColorSound(index);
         });
     });
+
+    // ============================================
+    // Audio Experience (Web Audio API)
+    // ============================================
+    let audioCtx = null;
+    let audioStarted = false;
+    let ambientNodes = [];
+
+    function initAudio() {
+        if (audioStarted) return;
+        audioStarted = true;
+        
+        try {
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            
+            // Create ambient drone
+            const masterGain = audioCtx.createGain();
+            masterGain.gain.value = 0.05;
+            masterGain.connect(audioCtx.destination);
+            
+            // Low frequency drone
+            const osc1 = audioCtx.createOscillator();
+            osc1.type = 'sine';
+            osc1.frequency.value = 55; // A1
+            
+            const osc2 = audioCtx.createOscillator();
+            osc2.type = 'sine';
+            osc2.frequency.value = 82.41; // E2
+            
+            const osc3 = audioCtx.createOscillator();
+            osc3.type = 'sine';
+            osc3.frequency.value = 110; // A2
+            
+            // Add subtle detune for richness
+            osc1.detune.value = -5;
+            osc2.detune.value = 3;
+            osc3.detune.value = 7;
+            
+            // Lowpass filter for warmth
+            const filter = audioCtx.createBiquadFilter();
+            filter.type = 'lowpass';
+            filter.frequency.value = 800;
+            
+            osc1.connect(filter);
+            osc2.connect(filter);
+            osc3.connect(filter);
+            filter.connect(masterGain);
+            
+            osc1.start();
+            osc2.start();
+            osc3.start();
+            
+            ambientNodes = [osc1, osc2, osc3, masterGain, filter];
+            
+            // Update audio toggle button
+            const audioBtn = document.getElementById('audioToggle');
+            if (audioBtn) {
+                audioBtn.classList.add('active');
+                audioBtn.querySelector('.audio-icon').textContent = '♪';
+            }
+        } catch (e) {
+            console.warn('Audio not supported:', e);
+        }
+    }
+
+    function stopAudio() {
+        if (!audioCtx) return;
+        
+        ambientNodes.forEach(node => {
+            try {
+                if (node.stop) node.stop();
+                if (node.disconnect) node.disconnect();
+            } catch (e) {}
+        });
+        ambientNodes = [];
+        audioStarted = false;
+        
+        const audioBtn = document.getElementById('audioToggle');
+        if (audioBtn) {
+            audioBtn.classList.remove('active');
+            audioBtn.querySelector('.audio-icon').textContent = '♪';
+        }
+    }
+
+    // Audio toggle button
+    const audioToggle = document.getElementById('audioToggle');
+    if (audioToggle) {
+        audioToggle.addEventListener('click', () => {
+            if (audioStarted) {
+                stopAudio();
+            } else {
+                initAudio();
+            }
+        });
+    }
+
+    // Play a tone when selecting a spectrum color
+    function playColorSound(index) {
+        if (!audioCtx || !audioStarted) return;
+        
+        const frequencies = [261.63, 293.66, 329.63, 392.00, 440.00, 493.88]; // C4, D4, E4, G4, A4, B4
+        const freq = frequencies[index] || 440;
+        
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        
+        osc.type = 'sine';
+        osc.frequency.value = freq;
+        
+        gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 1.5);
+        
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        
+        osc.start();
+        osc.stop(audioCtx.currentTime + 1.5);
+    }
 
     // ============================================
     // Consciousness Field Interaction
@@ -236,6 +518,21 @@
             fieldOrb.style.transform = '';
             fieldOrb.style.boxShadow = '';
         }, 300);
+        
+        // Play sound
+        if (audioCtx && audioStarted) {
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(220, audioCtx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(440, audioCtx.currentTime + 0.5);
+            gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 1);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start();
+            osc.stop(audioCtx.currentTime + 1);
+        }
     });
 
     // Mouse move effect on field
@@ -311,22 +608,6 @@
             const offset = center * -0.05;
             el.style.transform = `translateY(${offset}px)`;
         });
-    });
-
-    // ============================================
-    // Scroll-based color shift on canvas
-    // ============================================
-    let scrollColor = 0;
-    window.addEventListener('scroll', () => {
-        const scrollTop = window.scrollY;
-        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-        scrollColor = scrollTop / docHeight;
-    });
-
-    // Override drawParticles to include color shift
-    const originalDraw = drawParticles;
-    // We'll modify the particle drawing to include subtle color shifts
-    // by adjusting the particle color based on scroll position
-    // This is handled in the main draw loop
+    }, { passive: true });
 
 })();
