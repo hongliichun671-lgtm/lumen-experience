@@ -1,0 +1,447 @@
+/* ============================================
+   LUMEN Lab — Tools Page Styles
+   ============================================ */
+
+body {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    cursor: auto;
+}
+
+/* Tools Main */
+.tools-main {
+    padding: 120px 48px 80px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.tools-hero {
+    text-align: center;
+    margin-bottom: 80px;
+    padding-top: 40px;
+}
+
+.tools-hero-badge {
+    display: inline-block;
+    padding: 8px 20px;
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    margin-bottom: 24px;
+}
+
+.tools-hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 300;
+    margin-bottom: 16px;
+    letter-spacing: -0.02em;
+}
+
+.tools-hero-desc {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.7;
+}
+
+/* Tool Sections */
+.tool-section {
+    margin-bottom: 80px;
+}
+
+.tool-header {
+    margin-bottom: 32px;
+}
+
+.tool-number {
+    font-family: var(--font-display);
+    font-size: 0.85rem;
+    color: var(--text-tertiary);
+    letter-spacing: 0.2em;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.tool-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 400;
+    margin-bottom: 12px;
+}
+
+.tool-desc {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    max-width: 600px;
+}
+
+.tool-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 40px;
+    transition: border-color 0.3s;
+}
+
+.tool-card:hover {
+    border-color: var(--border-hover);
+}
+
+/* Spectrum Calculator */
+.spectrum-calc {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.calc-input-group {
+    margin-bottom: 32px;
+}
+
+.calc-input-group label {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+    letter-spacing: 0.05em;
+}
+
+.calc-input-group input[type="range"] {
+    width: 100%;
+    height: 6px;
+    background: linear-gradient(90deg, #ff0000, #ff8800, #ffee00, #00ff44, #00aaff, #8800ff);
+    border-radius: 100px;
+    -webkit-appearance: none;
+    appearance: none;
+    outline: none;
+    margin-bottom: 16px;
+}
+
+.calc-input-group input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    background: #ffffff;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+}
+
+.calc-value-display {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 300;
+    text-align: center;
+    color: var(--text-primary);
+}
+
+.calc-color-preview {
+    width: 100%;
+    height: 80px;
+    border-radius: 16px;
+    margin-bottom: 24px;
+    background: #00ff44;
+    transition: background 0.3s;
+    box-shadow: 0 0 40px rgba(0, 255, 68, 0.2);
+}
+
+.calc-info {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+.calc-info-item {
+    background: var(--bg-tertiary);
+    border-radius: 12px;
+    padding: 16px;
+    text-align: center;
+}
+
+.calc-info-label {
+    display: block;
+    font-size: 0.7rem;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+}
+
+.calc-info-value {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+/* Color Palette Generator */
+.palette-generator {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.palette-controls {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 24px;
+    justify-content: center;
+}
+
+.palette-btn {
+    padding: 12px 24px;
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    background: transparent;
+    color: var(--text-primary);
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: var(--font-body);
+}
+
+.palette-btn:hover {
+    border-color: var(--border-hover);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.palette-btn.secondary {
+    color: var(--text-secondary);
+}
+
+.palette-display {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.palette-color {
+    height: 120px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 12px;
+    transition: transform 0.3s;
+}
+
+.palette-color:hover {
+    transform: scale(1.05);
+}
+
+.palette-color span {
+    font-size: 0.7rem;
+    font-family: monospace;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 4px 8px;
+    border-radius: 4px;
+    color: #ffffff;
+}
+
+/* Refraction Simulator */
+.refraction-sim {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.refraction-sim canvas {
+    width: 100%;
+    border-radius: 16px;
+    background: var(--bg-tertiary);
+    margin-bottom: 24px;
+}
+
+.refraction-controls {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.refraction-controls label {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    white-space: nowrap;
+}
+
+.refraction-controls input[type="range"] {
+    flex: 1;
+    height: 6px;
+    background: var(--border);
+    border-radius: 100px;
+    -webkit-appearance: none;
+    appearance: none;
+    outline: none;
+}
+
+.refraction-controls input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: #ffffff;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.refraction-controls span {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 500;
+    min-width: 60px;
+    text-align: right;
+}
+
+/* Ambient Sound */
+.ambient-sound {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.ambient-controls {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 32px;
+    justify-content: center;
+}
+
+.ambient-btn {
+    padding: 12px 32px;
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    background: transparent;
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: var(--font-body);
+}
+
+.ambient-btn:hover {
+    border-color: var(--border-hover);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.ambient-btn.secondary {
+    color: var(--text-secondary);
+}
+
+.ambient-sliders {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.ambient-slider-group label {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+}
+
+.ambient-slider-group input[type="range"] {
+    width: 100%;
+    height: 6px;
+    background: var(--border);
+    border-radius: 100px;
+    -webkit-appearance: none;
+    appearance: none;
+    outline: none;
+}
+
+.ambient-slider-group input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: #ffffff;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/* Footer */
+.site-footer {
+    border-top: 1px solid var(--border);
+    padding: 40px 48px;
+    margin-top: 80px;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+}
+
+.footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+}
+
+.footer-links {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.footer-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: color 0.3s;
+}
+
+.footer-links a:hover {
+    color: var(--text-primary);
+}
+
+.footer-copy {
+    font-size: 0.75rem;
+    color: var(--text-tertiary);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .tools-main {
+        padding: 100px 24px 60px;
+    }
+    
+    .tool-card {
+        padding: 24px;
+    }
+    
+    .calc-info {
+        grid-template-columns: 1fr;
+    }
+    
+    .palette-display {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .palette-color {
+        height: 80px;
+    }
+    
+    .refraction-controls {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .footer-content {
+        padding: 0 24px;
+    }
+}
