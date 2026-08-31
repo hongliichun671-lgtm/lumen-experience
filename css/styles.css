@@ -16,6 +16,7 @@
     --border-hover: rgba(255, 255, 255, 0.2);
     --font-display: 'Space Grotesk', sans-serif;
     --font-body: 'Inter', sans-serif;
+    --font-khmer: 'Noto Sans Khmer', sans-serif;
     --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
     --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
     --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -39,6 +40,18 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     cursor: none;
+}
+
+/* Khmer font support */
+html[lang="km"] body,
+html[lang="km"] .origin-title,
+html[lang="km"] .section-title,
+html[lang="km"] .final-title,
+html[lang="km"] .stat-value,
+html[lang="km"] .spectrum-wavelength,
+html[lang="km"] .spectrum-name,
+html[lang="km"] .spectrum-frequency {
+    font-family: var(--font-khmer);
 }
 
 @media (max-width: 768px) {
@@ -236,6 +249,64 @@ body {
     width: 100%;
 }
 
+.nav-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.lang-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    color: var(--text-secondary);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    padding: 6px 14px;
+    cursor: pointer;
+    transition: all 0.3s var(--ease-out);
+    font-family: var(--font-body);
+}
+
+.lang-btn:hover {
+    border-color: var(--border-hover);
+    color: var(--text-primary);
+}
+
+.lang-btn.active {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.4);
+    color: var(--text-primary);
+}
+
+.audio-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s var(--ease-out);
+}
+
+.audio-btn:hover {
+    border-color: var(--border-hover);
+    color: var(--text-primary);
+}
+
+.audio-btn.active {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.4);
+    color: var(--text-primary);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+}
+
 .nav-progress {
     position: absolute;
     bottom: -1px;
@@ -261,6 +332,13 @@ body {
     }
     .nav-links {
         display: none;
+    }
+    .nav-controls {
+        gap: 6px;
+    }
+    .lang-btn {
+        padding: 5px 10px;
+        font-size: 0.65rem;
     }
 }
 
