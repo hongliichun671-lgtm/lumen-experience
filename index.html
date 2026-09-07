@@ -78,7 +78,10 @@
             <button class="lang-btn active" data-lang="en" aria-label="Switch to English">EN</button>
             <button class="lang-btn" data-lang="km" aria-label="Switch to Khmer">ខ្មែរ</button>
             <button class="audio-btn" id="audioToggle" aria-pressed="false" aria-label="Toggle audio">
-                <span class="audio-icon" aria-hidden="true">♪</span>
+                <span class="audio-icon" aria-hidden="true">♫</span>
+            </button>
+            <button class="audio-btn" id="speechToggle" aria-pressed="false" aria-label="Toggle speech to text" title="Speech to Text">
+                <span class="audio-icon" aria-hidden="true">🎤</span>
             </button>
         </div>
         <div class="nav-progress" aria-hidden="true">
@@ -88,6 +91,9 @@
 
     <!-- Canvas Background -->
     <canvas id="particleCanvas" aria-hidden="true"></canvas>
+
+    <!-- Speech Output -->
+    <div id="speechOutput" style="position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.7);color:#fff;padding:12px 20px;border-radius:12px;font-size:0.9rem;max-width:80%;text-align:center;display:none;z-index:10000;"></div>
 
     <!-- Main Content -->
     <main class="main" id="main-content">
