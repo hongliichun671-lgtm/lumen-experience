@@ -35,27 +35,27 @@
             finalFooter: 'An Interactive Experience'
         },
         km: {
-            preloaderSub: 'កំពុងភ្ញាក់...',
-            navOrigin: 'ប្រភព',
+            preloaderSub: 'កំពុងត្រៀម...',
+            navOrigin: 'ដើម',
             navSpectrum: 'វិសាលគម',
-            navConsciousness: 'មនសិការ',
-            navTranscend: 'ឆ្លងផុត',
+            navConsciousness: 'ស្មារតី',
+            navTranscend: '超越',
             originBadge: 'បទពិសោធន៍អន្តរកម្ម',
-            originSubtitle: 'រមូរដើម្បីចាប់ផ្តើមដំណើរចូលទៅក្នុងជម្រៅដ៏ភ្លឺស្វាងនៃការយល់ឃើញ។',
+            originSubtitle: 'រមូរចុះដើម្បីចាប់ផ្តើមការចុះទៅក្នុងជម្រៅនៃការយល់ឃើញ។',
             scroll: 'រមូរ',
             spectrumLabel: '០១ — វិសាលគម',
-            spectrumTitle: 'ពណ៌នីមួយៗគឺជាប្រេកង់នៃពន្លឺ។',
-            spectrumDesc: 'អ្វីដែលអ្នកយល់ឃើញថាជាពណ៌ គឺគ្រាន់តែជាការបកស្រាយរលកអេឡិចត្រូម៉ាញ៉េទិចដោយគំនិតរបស់អ្នកប៉ុណ្ណោះ។ ផ្លាស់ទីតាមវិសាលគម ហើយស្វែងរកអ្វីដែលនៅហួសពីអ្វីដែលអាចមើលឃើញ។',
-            consciousnessLabel: '០២ — មនសិការ',
-            consciousnessTitle: 'គំនិតគឺជាវាលដ៏ភ្លឺស្វាង។',
-            consciousnessDesc: 'មនសិការរបស់អ្នកមិនមែនជាវត្ថុទេ ប៉ុន្តែជាដំណើរការ — លំហូរបន្តនៃការយល់ឃើញ ការគិត និងការដឹងខ្លួន។ ធ្វើអន្តរកម្មជាមួយវាលខាងក្រោម។',
+            spectrumTitle: 'ពណ៌គ្រប់ពណ៌គឺជាប្រេកង់នៃពន្លឺ។',
+            spectrumDesc: 'អ្វីដែលអ្នកចាត់ទុកថាជាពណ៌គឺជាគំនិតរបស់អ្នកដែលបកស្រាយរលកអេឡិចត្រូម៉ាញ៉េទិច។',
+            consciousnessLabel: '០២ — ស្មារតី',
+            consciousnessTitle: 'ចិត្តគឺជាវាលពន្លឺ។',
+            consciousnessDesc: 'ស្មារតីរបស់អ្នកមិនមែនជារបស់វត្ថុទេ តែជាគ្រប់ដំណើរការ។',
             fieldLabel: 'ប៉ះវាល',
-            transcendLabel: '០៣ — ឆ្លងផុត',
-            transcendTitle: 'ហួសពីអ្វីដែលអាចមើលឃើញ។',
-            transcendDesc: 'មានសកលលោកមួយហួសពីអ្វីដែលភ្នែករបស់អ្នកអាចមើលឃើញ។ វិសាលគមនៃពន្លឺដែលមាននៅខាងក្រៅការយល់ឃើញរបស់អ្នក។',
+            transcendLabel: '០៣ — ប្រសើរជាងនេះ',
+            transcendTitle: 'លើសពីដែលអាចមើលឃើញ។',
+            transcendDesc: 'មានចក្រវាលក្រៅពីអ្វីដែលភ្នែកអ្នកអាចមើលឃើញ។',
             finalTitle: 'អ្នកបានឃើញពន្លឺហើយ។',
-            finalSubtitle: 'LUMEN គឺជាការស្វែងយល់អំពីការយល់ឃើញ មនសិការ និងវិសាលគមគ្មានកំណត់នៃអត្ថិភាព។',
-            returnOrigin: 'ត្រឡប់ទៅប្រភព',
+            finalSubtitle: 'LUMEN គឺជាការរុករកនៃការយល់ឃើញ។',
+            returnOrigin: 'ត្រឡប់ទៅដើម',
             finalFooter: 'បទពិសោធន៍អន្តរកម្ម'
         }
     };
@@ -66,32 +66,26 @@
         currentLang = lang;
         const t = translations[lang];
         
-        // Update all translatable elements
         document.querySelectorAll('[data-i18n]').forEach(el => {
             const key = el.dataset.i18n;
             if (t[key]) el.textContent = t[key];
         });
         
-        // Update document lang
         document.documentElement.lang = lang;
         
-        // Update language toggle buttons
         document.querySelectorAll('.lang-btn').forEach(btn => {
             btn.classList.toggle('active', btn.dataset.lang === lang);
         });
         
-        // Save preference
         localStorage.setItem('lumen-lang', lang);
     }
 
-    // Language toggle
     document.querySelectorAll('.lang-btn').forEach(btn => {
         btn.addEventListener('click', () => {
             applyLanguage(btn.dataset.lang);
         });
     });
 
-    // Load saved language
     const savedLang = localStorage.getItem('lumen-lang');
     if (savedLang && translations[savedLang]) {
         applyLanguage(savedLang);
@@ -106,8 +100,6 @@
             preloader.classList.add('hidden');
         }, 800);
     });
-
-    // Fallback: hide preloader after 3s regardless
     setTimeout(() => {
         preloader.classList.add('hidden');
     }, 3000);
@@ -136,7 +128,6 @@
     }
     animateCursor();
 
-    // Hover states for cursor
     const hoverTargets = document.querySelectorAll('a, button, .spectrum-card, .consciousness-field, .btn-magnetic');
     hoverTargets.forEach(target => {
         target.addEventListener('mouseenter', () => cursorRing.classList.add('hover'));
@@ -150,21 +141,18 @@
     const navProgress = document.getElementById('navProgress');
 
     window.addEventListener('scroll', () => {
-        // Nav background
         if (window.scrollY > 50) {
             nav.classList.add('scrolled');
         } else {
             nav.classList.remove('scrolled');
         }
 
-        // Progress bar
         const scrollTop = window.scrollY;
         const docHeight = document.documentElement.scrollHeight - window.innerHeight;
         const progress = (scrollTop / docHeight) * 100;
         navProgress.style.width = progress + '%';
     }, { passive: true });
 
-    // Smooth scroll for nav links
     document.querySelectorAll('[data-scroll]').forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
@@ -176,7 +164,7 @@
     });
 
     // ============================================
-    // Scene Visibility (Intersection Observer)
+    // Scene Visibility
     // ============================================
     const scenes = document.querySelectorAll('.scene');
     const observer = new IntersectionObserver((entries) => {
@@ -190,7 +178,7 @@
     scenes.forEach(scene => observer.observe(scene));
 
     // ============================================
-    // Particle Canvas (Optimized)
+    // Particle Canvas
     // ============================================
     const canvas = document.getElementById('particleCanvas');
     const ctx = canvas.getContext('2d');
@@ -200,13 +188,12 @@
     let scrollProgress = 0;
     let resizeTimeout;
 
-    // Scroll-based color palette
     const scrollColors = [
-        { r: 255, g: 255, b: 255 },   // White (Origin)
-        { r: 255, g: 136, b: 0 },     // Orange (Spectrum)
-        { r: 0, g: 170, b: 255 },     // Blue (Consciousness)
-        { r: 136, g: 0, b: 255 },     // Violet (Transcendence)
-        { r: 255, g: 255, b: 255 }    // White (Final)
+        { r: 255, g: 255, b: 255 },
+        { r: 255, g: 136, b: 0 },
+        { r: 0, g: 170, b: 255 },
+        { r: 136, g: 0, b: 255 },
+        { r: 255, g: 255, b: 255 }
     ];
 
     function getScrollColor(progress) {
@@ -227,14 +214,12 @@
         initParticles();
     }
 
-    // Debounced resize
     window.addEventListener('resize', () => {
         clearTimeout(resizeTimeout);
         resizeTimeout = setTimeout(resizeCanvas, 150);
     });
 
     function initParticles() {
-        // Optimized particle count based on device
         const isMobile = window.innerWidth < 768;
         const particleCount = isMobile
             ? Math.min(Math.floor(window.innerWidth / 12), 80)
@@ -254,7 +239,6 @@
         }
     }
 
-    // Spatial grid optimization for connection lines
     const CONNECTION_DIST = 100;
     const GRID_CELL = CONNECTION_DIST;
 
@@ -262,18 +246,13 @@
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         
         const color = getScrollColor(scrollProgress);
-        
-        // Build spatial grid
         const grid = {};
-        const cols = Math.ceil(canvas.width / GRID_CELL);
-        const rows = Math.ceil(canvas.height / GRID_CELL);
         
         particles.forEach(p => {
             p.x += p.speedX;
             p.y += p.speedY;
             p.pulse += 0.02;
             
-            // Wrap around edges
             if (p.x < 0) p.x = canvas.width;
             if (p.x > canvas.width) p.x = 0;
             if (p.y < 0) p.y = canvas.height;
@@ -281,13 +260,11 @@
             
             const pulseOpacity = p.opacity * (0.7 + Math.sin(p.pulse) * 0.3);
             
-            // Draw particle with scroll color
             ctx.beginPath();
             ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
             ctx.fillStyle = `rgba(${color.r}, ${color.g}, ${color.b}, ${pulseOpacity})`;
             ctx.fill();
             
-            // Add to grid
             const gx = Math.floor(p.x / GRID_CELL);
             const gy = Math.floor(p.y / GRID_CELL);
             const key = gx + ',' + gy;
@@ -295,12 +272,10 @@
             grid[key].push(p);
         });
         
-        // Draw connecting lines using spatial grid (O(n) instead of O(n²))
         particles.forEach(p => {
             const gx = Math.floor(p.x / GRID_CELL);
             const gy = Math.floor(p.y / GRID_CELL);
             
-            // Check neighboring cells
             for (let dx = -1; dx <= 1; dx++) {
                 for (let dy = -1; dy <= 1; dy++) {
                     const neighbors = grid[(gx + dx) + ',' + (gy + dy)];
@@ -330,9 +305,6 @@
         drawParticles();
     }
 
-    // ============================================
-    // Scroll Progress Tracking
-    // ============================================
     window.addEventListener('scroll', () => {
         const scrollTop = window.scrollY;
         const docHeight = document.documentElement.scrollHeight - window.innerHeight;
@@ -350,11 +322,9 @@
 
     spectrumCards.forEach(card => {
         card.addEventListener('click', () => {
-            // Remove active from all
             spectrumCards.forEach(c => c.classList.remove('active'));
             card.classList.add('active');
             
-            // Update spectrum info
             const color = card.dataset.color;
             const name = card.dataset.name;
             const wavelength = card.dataset.wavelength;
@@ -364,23 +334,20 @@
             spectrumName.textContent = name;
             spectrumFrequency.textContent = frequency;
             
-            // Move marker along the bar
             const colors = ['#ff0000', '#ff8800', '#ffee00', '#00ff44', '#00aaff', '#8800ff'];
             const index = colors.indexOf(color);
             const position = (index / (colors.length - 1)) * 100;
             spectrumMarker.style.left = position + '%';
             
-            // Update marker color
             spectrumMarker.style.background = color;
             spectrumMarker.style.boxShadow = `0 0 20px ${color}`;
             
-            // Play sound for color
             playColorSound(index);
         });
     });
 
     // ============================================
-    // Audio Experience (Web Audio API)
+    // Audio Experience
     // ============================================
     let audioCtx = null;
     let audioStarted = false;
@@ -393,30 +360,26 @@
         try {
             audioCtx = new (window.AudioContext || window.webkitAudioContext)();
             
-            // Create ambient drone
             const masterGain = audioCtx.createGain();
             masterGain.gain.value = 0.05;
             masterGain.connect(audioCtx.destination);
             
-            // Low frequency drone
             const osc1 = audioCtx.createOscillator();
             osc1.type = 'sine';
-            osc1.frequency.value = 55; // A1
+            osc1.frequency.value = 55;
             
             const osc2 = audioCtx.createOscillator();
             osc2.type = 'sine';
-            osc2.frequency.value = 82.41; // E2
+            osc2.frequency.value = 82.41;
             
             const osc3 = audioCtx.createOscillator();
             osc3.type = 'sine';
-            osc3.frequency.value = 110; // A2
+            osc3.frequency.value = 110;
             
-            // Add subtle detune for richness
             osc1.detune.value = -5;
             osc2.detune.value = 3;
             osc3.detune.value = 7;
             
-            // Lowpass filter for warmth
             const filter = audioCtx.createBiquadFilter();
             filter.type = 'lowpass';
             filter.frequency.value = 800;
@@ -432,11 +395,9 @@
             
             ambientNodes = [osc1, osc2, osc3, masterGain, filter];
             
-            // Update audio toggle button
             const audioBtn = document.getElementById('audioToggle');
             if (audioBtn) {
                 audioBtn.classList.add('active');
-                audioBtn.querySelector('.audio-icon').textContent = '♪';
             }
         } catch (e) {
             console.warn('Audio not supported:', e);
@@ -458,11 +419,9 @@
         const audioBtn = document.getElementById('audioToggle');
         if (audioBtn) {
             audioBtn.classList.remove('active');
-            audioBtn.querySelector('.audio-icon').textContent = '♪';
         }
     }
 
-    // Audio toggle button
     const audioToggle = document.getElementById('audioToggle');
     if (audioToggle) {
         audioToggle.addEventListener('click', () => {
@@ -474,11 +433,10 @@
         });
     }
 
-    // Play a tone when selecting a spectrum color
     function playColorSound(index) {
         if (!audioCtx || !audioStarted) return;
         
-        const frequencies = [261.63, 293.66, 329.63, 392.00, 440.00, 493.88]; // C4, D4, E4, G4, A4, B4
+        const frequencies = [261.63, 293.66, 329.63, 392.00, 440.00, 493.88];
         const freq = frequencies[index] || 440;
         
         const osc = audioCtx.createOscillator();
@@ -498,19 +456,116 @@
     }
 
     // ============================================
-    // Consciousness Field Interaction
+    // Speech-to-Text with Web Speech API
+    // ============================================
+    let speechRecognition = null;
+    let speechListening = false;
+    const speechToggle = document.getElementById('speechToggle');
+    const speechOutput = document.getElementById('speechOutput');
+
+    function initSpeechRecognition() {
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (!SpeechRecognition) {
+            alert('Speech Recognition not supported in this browser. Try Chrome/Edge.');
+            return null;
+        }
+        
+        const recognition = new SpeechRecognition();
+        recognition.continuous = true;
+        recognition.interimResults = true;
+        recognition.lang = currentLang === 'km' ? 'km-KH' : 'en-US';
+        
+        return recognition;
+    }
+
+    function showSpeechOutput(text, isFinal = false) {
+        if (!speechOutput) return;
+        speechOutput.textContent = text || 'Listening...';
+        speechOutput.style.display = 'block';
+        if (isFinal) {
+            setTimeout(() => {
+                speechOutput.style.display = 'none';
+            }, 4000);
+        }
+    }
+
+    if (speechToggle) {
+        speechToggle.addEventListener('click', async () => {
+            if (!speechRecognition) {
+                speechRecognition = initSpeechRecognition();
+                if (!speechRecognition) return;
+                
+                speechRecognition.onresult = (event) => {
+                    let interimTranscript = '';
+                    let finalTranscript = '';
+                    
+                    for (let i = event.resultIndex; i < event.results.length; i++) {
+                        const transcript = event.results[i][0].transcript;
+                        if (event.results[i].isFinal) {
+                            finalTranscript += transcript;
+                        } else {
+                            interimTranscript += transcript;
+                        }
+                    }
+                    
+                    if (finalTranscript) {
+                        showSpeechOutput(finalTranscript, true);
+                        console.log('Final:', finalTranscript);
+                    } else if (interimTranscript) {
+                        showSpeechOutput(interimTranscript);
+                    }
+                };
+                
+                speechRecognition.onerror = (event) => {
+                    console.error('Speech recognition error', event.error);
+                    showSpeechOutput('Error: ' + event.error);
+                    speechListening = false;
+                    speechToggle.classList.remove('active');
+                    speechToggle.setAttribute('aria-pressed', 'false');
+                };
+                
+                speechRecognition.onend = () => {
+                    if (speechListening) {
+                        speechRecognition.start();
+                    }
+                };
+            }
+            
+            if (!speechListening) {
+                try {
+                    await speechRecognition.start();
+                    speechListening = true;
+                    speechToggle.classList.add('active');
+                    speechToggle.setAttribute('aria-pressed', 'true');
+                    showSpeechOutput('Listening...', false);
+                    
+                    // Update language if changed
+                    speechRecognition.lang = currentLang === 'km' ? 'km-KH' : 'en-US';
+                } catch (e) {
+                    console.error(e);
+                }
+            } else {
+                speechRecognition.stop();
+                speechListening = false;
+                speechToggle.classList.remove('active');
+                speechToggle.setAttribute('aria-pressed', 'false');
+                speechOutput.style.display = 'none';
+            }
+        });
+    }
+
+    // ============================================
+    // Consciousness Field
     // ============================================
     const field = document.getElementById('consciousnessField');
     const fieldOrb = document.getElementById('fieldOrb');
     const fieldRipple = document.getElementById('fieldRipple');
 
     field.addEventListener('click', (e) => {
-        // Create ripple
         fieldRipple.classList.remove('active');
         void fieldRipple.offsetWidth;
         fieldRipple.classList.add('active');
         
-        // Orb burst effect
         fieldOrb.style.transform = 'scale(1.3)';
         fieldOrb.style.boxShadow = '0 0 100px rgba(255, 255, 255, 0.6)';
         
@@ -519,7 +574,6 @@
             fieldOrb.style.boxShadow = '';
         }, 300);
         
-        // Play sound
         if (audioCtx && audioStarted) {
             const osc = audioCtx.createOscillator();
             const gain = audioCtx.createGain();
@@ -535,7 +589,6 @@
         }
     });
 
-    // Mouse move effect on field
     field.addEventListener('mousemove', (e) => {
         const rect = field.getBoundingClientRect();
         const x = e.clientX - rect.left - rect.width / 2;
@@ -597,7 +650,7 @@
     statValues.forEach(stat => counterObserver.observe(stat));
 
     // ============================================
-    // Parallax Effect on Scroll
+    // Parallax Effect
     // ============================================
     const parallaxElements = document.querySelectorAll('.transcend-visual, .consciousness-field');
     
