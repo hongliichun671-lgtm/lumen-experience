@@ -456,37 +456,74 @@
     }
 
     // ============================================
-    // Speech-to-Text with Web Speech API
+    // Speech-to-Text with Web Speech API - Production Ready
     // ============================================
     let speechRecognition = null;
     let speechListening = false;
     const speechToggle = document.getElementById('speechToggle');
-    const speechOutput = document.getElementById('speechOutput');
+    let speechOutput = document.getElementById('speechOutput');
+
+    // Create speech UI if not exists
+    if (!speechOutput) {
+        speechOutput = document.createElement('div');
+        speechOutput.id = 'speechOutput';
+        speechOutput.style.cssText = `
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(5,5,8,0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            color: #fff;
+            padding: 16px 24px;
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.95rem;
+            max-width: 90%;
+            width: 560px;
+            text-align: left;
+            display: none;
+            z-index: 10000;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+        `;
+        document.body.appendChild(speechOutput);
+    }
+
+    function getSpeechLang() {
+        return currentLang === 'km' ? 'km-KH' : 'en-US';
+    }
 
     function initSpeechRecognition() {
         const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
         if (!SpeechRecognition) {
-            alert('Speech Recognition not supported in this browser. Try Chrome/Edge.');
+            showSpeechOutput('Speech Recognition not supported. Use Chrome/Edge.', true);
             return null;
         }
         
         const recognition = new SpeechRecognition();
         recognition.continuous = true;
         recognition.interimResults = true;
-        recognition.lang = currentLang === 'km' ? 'km-KH' : 'en-US';
+        recognition.lang = getSpeechLang();
         
         return recognition;
     }
 
-    function showSpeechOutput(text, isFinal = false) {
+    function showSpeechOutput(text, isError = false) {
         if (!speechOutput) return;
-        speechOutput.textContent = text || 'Listening...';
+        speechOutput.innerHTML = isError 
+            ? `<div style="color:#ff6b6b;font-weight:500;">⚠ ${text}</div>`
+            : `<div style="display:flex;align-items:flex-start;gap:12px;">
+                <div style="width:8px;height:8px;background:#fff;border-radius:50%;margin-top:6px;animation:pulse 1.5s infinite;box-shadow:0 0 12px rgba(255,255,255,0.8);"></div>
+                <div style="flex:1;">${text || 'Listening...'}</div>
+               </div>`;
         speechOutput.style.display = 'block';
-        if (isFinal) {
-            setTimeout(() => {
-                speechOutput.style.display = 'none';
-            }, 4000);
-        }
+    }
+
+    function hideSpeechOutput() {
+        if (speechOutput) speechOutput.style.display = 'none';
     }
 
     if (speechToggle) {
@@ -502,23 +539,31 @@
                     for (let i = event.resultIndex; i < event.results.length; i++) {
                         const transcript = event.results[i][0].transcript;
                         if (event.results[i].isFinal) {
-                            finalTranscript += transcript;
+                            finalTranscript += transcript + ' ';
                         } else {
                             interimTranscript += transcript;
                         }
                     }
                     
                     if (finalTranscript) {
-                        showSpeechOutput(finalTranscript, true);
-                        console.log('Final:', finalTranscript);
+                        showSpeechOutput(`<strong>Final:</strong> ${finalTranscript.trim()}`);
+                        console.log('Speech Final:', finalTranscript);
+                        // Auto-hide after 3s
+                        setTimeout(() => {
+                            if (!speechListening) hideSpeechOutput();
+                        }, 3000);
                     } else if (interimTranscript) {
-                        showSpeechOutput(interimTranscript);
+                        showSpeechOutput(`<em>Listening:</em> ${interimTranscript}`);
                     }
                 };
                 
                 speechRecognition.onerror = (event) => {
-                    console.error('Speech recognition error', event.error);
-                    showSpeechOutput('Error: ' + event.error);
+                    console.error('Speech error:', event.error);
+                    let msg = 'Speech error';
+                    if (event.error === 'not-allowed') msg = 'Microphone access denied. Please allow microphone.';
+                    if (event.error === 'no-speech') msg = 'No speech detected. Try again.';
+                    if (event.error === 'network') msg = 'Network error. Check connection.';
+                    showSpeechOutput(msg, true);
                     speechListening = false;
                     speechToggle.classList.remove('active');
                     speechToggle.setAttribute('aria-pressed', 'false');
@@ -526,30 +571,32 @@
                 
                 speechRecognition.onend = () => {
                     if (speechListening) {
-                        speechRecognition.start();
+                        // Auto-restart
+                        try {
+                            speechRecognition.start();
+                        } catch(e){}
                     }
                 };
             }
             
             if (!speechListening) {
                 try {
+                    speechRecognition.lang = getSpeechLang();
                     await speechRecognition.start();
                     speechListening = true;
                     speechToggle.classList.add('active');
                     speechToggle.setAttribute('aria-pressed', 'true');
-                    showSpeechOutput('Listening...', false);
-                    
-                    // Update language if changed
-                    speechRecognition.lang = currentLang === 'km' ? 'km-KH' : 'en-US';
+                    showSpeechOutput('🎤 Listening... Speak now');
                 } catch (e) {
                     console.error(e);
+                    showSpeechOutput('Failed to start. Check microphone permission.', true);
                 }
             } else {
                 speechRecognition.stop();
                 speechListening = false;
                 speechToggle.classList.remove('active');
                 speechToggle.setAttribute('aria-pressed', 'false');
-                speechOutput.style.display = 'none';
+                hideSpeechOutput();
             }
         });
     }
