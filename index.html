@@ -8,6 +8,7 @@
     <meta name="keywords" content="LUMEN, light, interactive experience, science tools, spectrum calculator, color palette, physics, consciousness, education">
     <meta name="author" content="LUMEN">
     <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://hongliichun671-lgtm.github.io/lumen-experience/">
     
     <!-- Open Graph -->
     <meta property="og:type" content="website">
@@ -38,62 +39,66 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@200;300;400;500&family=Noto+Sans+Khmer:wght@300;400;500;600&display=swap">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@200;300;400;500&family=Noto+Sans+Khmer:wght@300;400;500;600&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="css/styles.css">
+    <meta name="theme-color" content="#000000">
 </head>
 <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
     <!-- Preloader -->
-    <div class="preloader" id="preloader">
+    <div class="preloader" id="preloader" aria-hidden="true">
         <div class="preloader-inner">
-            <div class="preloader-ring"></div>
+            <div class="preloader-ring" aria-hidden="true"></div>
             <div class="preloader-text">LUMEN</div>
             <div class="preloader-sub" data-i18n="preloaderSub">Awakening...</div>
         </div>
     </div>
 
     <!-- Custom Cursor -->
-    <div class="cursor-dot" id="cursorDot"></div>
-    <div class="cursor-ring" id="cursorRing"></div>
+    <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+    <div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
 
     <!-- Navigation -->
-    <nav class="nav" id="nav">
+    <nav class="nav" id="nav" aria-label="Main navigation">
         <div class="nav-logo">
-            <span class="nav-logo-dot"></span>
+            <span class="nav-logo-dot" aria-hidden="true"></span>
             <span class="nav-logo-text">LUMEN</span>
         </div>
         <div class="nav-links">
-            <a href="index.html" class="nav-link">Home</a>
+            <a href="index.html" class="nav-link" aria-current="page">Home</a>
             <a href="tools.html" class="nav-link">Tools</a>
             <a href="articles.html" class="nav-link">Articles</a>
             <a href="about.html" class="nav-link">About</a>
             <a href="contact.html" class="nav-link">Contact</a>
         </div>
         <div class="nav-controls">
-            <button class="lang-btn active" data-lang="en" aria-label="English">EN</button>
-            <button class="lang-btn" data-lang="km" aria-label="ភាសាខ្មែរ">ខ្មែរ</button>
-            <button class="audio-btn" id="audioToggle" aria-label="Toggle audio">
-                <span class="audio-icon">♪</span>
+            <button class="lang-btn active" data-lang="en" aria-label="Switch to English">EN</button>
+            <button class="lang-btn" data-lang="km" aria-label="Switch to Khmer">ខ្មែរ</button>
+            <button class="audio-btn" id="audioToggle" aria-pressed="false" aria-label="Toggle audio">
+                <span class="audio-icon" aria-hidden="true">♪</span>
             </button>
         </div>
-        <div class="nav-progress">
+        <div class="nav-progress" aria-hidden="true">
             <div class="nav-progress-bar" id="navProgress"></div>
         </div>
     </nav>
 
     <!-- Canvas Background -->
-    <canvas id="particleCanvas"></canvas>
+    <canvas id="particleCanvas" aria-hidden="true"></canvas>
 
     <!-- Main Content -->
-    <main class="main">
+    <main class="main" id="main-content">
         <!-- Scene 1: Origin -->
-        <section class="scene scene-origin" id="origin">
+        <section class="scene scene-origin" id="origin" aria-labelledby="origin-title">
             <div class="scene-content">
                 <div class="origin-badge">
-                    <span class="origin-badge-dot"></span>
+                    <span class="origin-badge-dot" aria-hidden="true"></span>
                     <span data-i18n="originBadge">An Interactive Experience</span>
                 </div>
-                <h1 class="origin-title">
+                <h1 class="origin-title" id="origin-title">
                     <span class="title-line title-line-1">LUMEN</span>
                     <span class="title-line title-line-2">A Journey</span>
                     <span class="title-line title-line-3">Through Light</span>
@@ -101,7 +106,7 @@
                 <p class="origin-subtitle" data-i18n="originSubtitle">
                     Scroll to begin your descent into the luminous depths of perception.
                 </p>
-                <div class="scroll-indicator">
+                <div class="scroll-indicator" aria-hidden="true">
                     <div class="scroll-line"></div>
                     <span data-i18n="scroll">Scroll</span>
                 </div>
@@ -109,89 +114,89 @@
         </section>
 
         <!-- Scene 2: The Spectrum -->
-        <section class="scene scene-spectrum" id="spectrum">
+        <section class="scene scene-spectrum" id="spectrum" aria-labelledby="spectrum-title">
             <div class="scene-content">
                 <div class="section-label" data-i18n="spectrumLabel">01 — The Spectrum</div>
-                <h2 class="section-title" data-i18n="spectrumTitle">Every color is a <span class="accent">frequency</span> of light.</h2>
+                <h2 class="section-title" id="spectrum-title" data-i18n="spectrumTitle">Every color is a <span class="accent">frequency</span> of light.</h2>
                 <p class="section-desc" data-i18n="spectrumDesc">
                     What you perceive as color is merely your mind interpreting electromagnetic waves. 
                     Move through the spectrum and discover what lies beyond the visible.
                 </p>
                 
-                <div class="spectrum-container">
-                    <div class="spectrum-bar">
+                <div class="spectrum-container" role="region" aria-label="Interactive spectrum explorer">
+                    <div class="spectrum-bar" role="slider" aria-label="Spectrum wavelength" aria-valuemin="400" aria-valuemax="700" aria-valuenow="550" id="spectrumBar">
                         <div class="spectrum-gradient"></div>
-                        <div class="spectrum-marker" id="spectrumMarker"></div>
+                        <div class="spectrum-marker" id="spectrumMarker" tabindex="0" role="button" aria-label="Adjust spectrum"></div>
                     </div>
                     <div class="spectrum-info">
-                        <div class="spectrum-wavelength" id="spectrumWavelength">~550 nm</div>
-                        <div class="spectrum-name" id="spectrumName">Green</div>
-                        <div class="spectrum-frequency" id="spectrumFrequency">545 THz</div>
+                        <div class="spectrum-wavelength" id="spectrumWavelength" aria-live="polite">~550 nm</div>
+                        <div class="spectrum-name" id="spectrumName" aria-live="polite">Green</div>
+                        <div class="spectrum-frequency" id="spectrumFrequency" aria-live="polite">545 THz</div>
                     </div>
                 </div>
                 
-                <div class="spectrum-cards">
-                    <div class="spectrum-card" data-color="#ff0000" data-name="Red" data-wavelength="~700 nm" data-frequency="428 THz">
-                        <div class="spectrum-card-swatch" style="background:#ff0000"></div>
+                <div class="spectrum-cards" role="list">
+                    <button class="spectrum-card" role="listitem" data-color="#ff0000" data-name="Red" data-wavelength="~700 nm" data-frequency="428 THz" aria-label="Red, ~700 nm, 428 THz">
+                        <div class="spectrum-card-swatch" style="background:#ff0000" aria-hidden="true"></div>
                         <div class="spectrum-card-name">Red</div>
                         <div class="spectrum-card-desc">The longest wavelength visible to the human eye.</div>
-                    </div>
-                    <div class="spectrum-card" data-color="#ff8800" data-name="Orange" data-wavelength="~620 nm" data-frequency="484 THz">
-                        <div class="spectrum-card-swatch" style="background:#ff8800"></div>
+                    </button>
+                    <button class="spectrum-card" role="listitem" data-color="#ff8800" data-name="Orange" data-wavelength="~620 nm" data-frequency="484 THz" aria-label="Orange, ~620 nm, 484 THz">
+                        <div class="spectrum-card-swatch" style="background:#ff8800" aria-hidden="true"></div>
                         <div class="spectrum-card-name">Orange</div>
                         <div class="spectrum-card-desc">Warmth and energy, the color of transition.</div>
-                    </div>
-                    <div class="spectrum-card" data-color="#ffee00" data-name="Yellow" data-wavelength="~580 nm" data-frequency="517 THz">
-                        <div class="spectrum-card-swatch" style="background:#ffee00"></div>
+                    </button>
+                    <button class="spectrum-card" role="listitem" data-color="#ffee00" data-name="Yellow" data-wavelength="~580 nm" data-frequency="517 THz" aria-label="Yellow, ~580 nm, 517 THz">
+                        <div class="spectrum-card-swatch" style="background:#ffee00" aria-hidden="true"></div>
                         <div class="spectrum-card-name">Yellow</div>
                         <div class="spectrum-card-desc">The brightest color, perceived as most luminous.</div>
-                    </div>
-                    <div class="spectrum-card" data-color="#00ff44" data-name="Green" data-wavelength="~550 nm" data-frequency="545 THz">
-                        <div class="spectrum-card-swatch" style="background:#00ff44"></div>
+                    </button>
+                    <button class="spectrum-card" role="listitem" data-color="#00ff44" data-name="Green" data-wavelength="~550 nm" data-frequency="545 THz" aria-label="Green, ~550 nm, 545 THz">
+                        <div class="spectrum-card-swatch" style="background:#00ff44" aria-hidden="true"></div>
                         <div class="spectrum-card-name">Green</div>
                         <div class="spectrum-card-desc">The center of the visible spectrum, balance.</div>
-                    </div>
-                    <div class="spectrum-card" data-color="#00aaff" data-name="Blue" data-wavelength="~470 nm" data-frequency="638 THz">
-                        <div class="spectrum-card-swatch" style="background:#00aaff"></div>
+                    </button>
+                    <button class="spectrum-card" role="listitem" data-color="#00aaff" data-name="Blue" data-wavelength="~470 nm" data-frequency="638 THz" aria-label="Blue, ~470 nm, 638 THz">
+                        <div class="spectrum-card-swatch" style="background:#00aaff" aria-hidden="true"></div>
                         <div class="spectrum-card-name">Blue</div>
                         <div class="spectrum-card-desc">The color of depth, sky, and infinite space.</div>
-                    </div>
-                    <div class="spectrum-card" data-color="#8800ff" data-name="Violet" data-wavelength="~400 nm" data-frequency="750 THz">
-                        <div class="spectrum-card-swatch" style="background:#8800ff"></div>
+                    </button>
+                    <button class="spectrum-card" role="listitem" data-color="#8800ff" data-name="Violet" data-wavelength="~400 nm" data-frequency="750 THz" aria-label="Violet, ~400 nm, 750 THz">
+                        <div class="spectrum-card-swatch" style="background:#8800ff" aria-hidden="true"></div>
                         <div class="spectrum-card-name">Violet</div>
                         <div class="spectrum-card-desc">The shortest wavelength, the edge of perception.</div>
-                    </div>
+                    </button>
                 </div>
             </div>
         </section>
 
         <!-- Scene 3: Consciousness -->
-        <section class="scene scene-consciousness" id="consciousness">
+        <section class="scene scene-consciousness" id="consciousness" aria-labelledby="consciousness-title">
             <div class="scene-content">
                 <div class="section-label" data-i18n="consciousnessLabel">02 — Consciousness</div>
-                <h2 class="section-title" data-i18n="consciousnessTitle">The mind is a <span class="accent">luminous</span> field.</h2>
+                <h2 class="section-title" id="consciousness-title" data-i18n="consciousnessTitle">The mind is a <span class="accent">luminous</span> field.</h2>
                 <p class="section-desc" data-i18n="consciousnessDesc">
                     Your consciousness is not a thing, but a process — a continuous flow of perception, 
                     thought, and awareness. Interact with the field below.
                 </p>
                 
-                <div class="consciousness-field" id="consciousnessField">
-                    <div class="field-orb" id="fieldOrb"></div>
-                    <div class="field-ripple" id="fieldRipple"></div>
+                <div class="consciousness-field" id="consciousnessField" role="button" tabindex="0" aria-label="Interactive consciousness field. Click or press Enter to interact">
+                    <div class="field-orb" id="fieldOrb" aria-hidden="true"></div>
+                    <div class="field-ripple" id="fieldRipple" aria-hidden="true"></div>
                     <div class="field-label" data-i18n="fieldLabel">Touch the field</div>
                 </div>
                 
-                <div class="consciousness-stats">
-                    <div class="stat-item">
-                        <div class="stat-value" data-count="86">0</div>
+                <div class="consciousness-stats" role="list">
+                    <div class="stat-item" role="listitem">
+                        <div class="stat-value" data-count="86" aria-label="86 Billion Neurons">0</div>
                         <div class="stat-label">Billion Neurons</div>
                     </div>
-                    <div class="stat-item">
-                        <div class="stat-value" data-count="100">0</div>
+                    <div class="stat-item" role="listitem">
+                        <div class="stat-value" data-count="100" aria-label="100 Trillion Synapses">0</div>
                         <div class="stat-label">Trillion Synapses</div>
                     </div>
-                    <div class="stat-item">
-                        <div class="stat-value" data-count="20">0</div>
+                    <div class="stat-item" role="listitem">
+                        <div class="stat-value" data-count="20" aria-label="20 Watts of Power">0</div>
                         <div class="stat-label">Watts of Power</div>
                     </div>
                 </div>
@@ -199,16 +204,16 @@
         </section>
 
         <!-- Scene 4: Transcendence -->
-        <section class="scene scene-transcend" id="transcend">
+        <section class="scene scene-transcend" id="transcend" aria-labelledby="transcend-title">
             <div class="scene-content">
                 <div class="section-label" data-i18n="transcendLabel">03 — Transcendence</div>
-                <h2 class="section-title" data-i18n="transcendTitle">Beyond the <span class="accent">visible</span>.</h2>
+                <h2 class="section-title" id="transcend-title" data-i18n="transcendTitle">Beyond the <span class="accent">visible</span>.</h2>
                 <p class="section-desc" data-i18n="transcendDesc">
                     There is a universe beyond what your eyes can see. 
                     A spectrum of light that exists outside your perception.
                 </p>
                 
-                <div class="transcend-visual">
+                <div class="transcend-visual" aria-hidden="true">
                     <div class="transcend-ring transcend-ring-1"></div>
                     <div class="transcend-ring transcend-ring-2"></div>
                     <div class="transcend-ring transcend-ring-3"></div>
@@ -217,26 +222,26 @@
                     </div>
                 </div>
                 
-                <div class="transcend-quote">
+                <blockquote class="transcend-quote">
                     "The most beautiful thing we can experience is the mysterious."
                     <span class="quote-author">— Albert Einstein</span>
-                </div>
+                </blockquote>
             </div>
         </section>
 
         <!-- Scene 5: Final Reveal -->
-        <section class="scene scene-final" id="final">
+        <section class="scene scene-final" id="final" aria-labelledby="final-title">
             <div class="scene-content">
-                <div class="final-glow"></div>
-                <h2 class="final-title" data-i18n="finalTitle">You have seen the light.</h2>
+                <div class="final-glow" aria-hidden="true"></div>
+                <h2 class="final-title" id="final-title" data-i18n="finalTitle">You have seen the light.</h2>
                 <p class="final-subtitle" data-i18n="finalSubtitle">
                     LUMEN is an exploration of perception, consciousness, and the infinite spectrum of existence.
                 </p>
                 <div class="final-actions">
-                    <a href="#origin" class="btn-magnetic" data-scroll>
+                    <a href="#origin" class="btn-magnetic" data-scroll aria-label="Return to origin">
                         <span data-i18n="returnOrigin">Return to Origin</span>
                     </a>
-                    <a href="tools.html" class="btn-magnetic" style="margin-left: 16px;">
+                    <a href="tools.html" class="btn-magnetic" style="margin-left: 16px;" aria-label="Explore tools">
                         <span>Explore Tools</span>
                     </a>
                 </div>
@@ -251,6 +256,6 @@
         </section>
     </main>
 
-    <script src="js/main.js"></script>
+    <script src="js/main.js" defer></script>
 </body>
 </html>
