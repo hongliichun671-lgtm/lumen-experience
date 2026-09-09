@@ -1,0 +1,444 @@
+/* ============================================
+   LUMEN — 3D Transcendence + Easter Egg Styles
+   ============================================ */
+
+/* ---- 3D Transcendence Rings ---- */
+.transcend-visual {
+  perspective: 1200px;
+  perspective-origin: 50% 50%;
+}
+
+.transcend-rings-3d {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.15s ease-out;
+}
+
+.transcend-ring-3d {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transform-style: preserve-3d;
+  transform: translate(-50%, -50%);
+  will-change: transform;
+}
+
+.transcend-ring-3d::before,
+.transcend-ring-3d::after {
+  content: '';
+  position: absolute;
+  inset: 8px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.transcend-ring-3d::after {
+  inset: 16px;
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
+.ring-orbit {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: #fff;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.8);
+}
+
+.transcend-core-3d {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffffff, rgba(255, 255, 255, 0.1) 60%, transparent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 80px rgba(255, 255, 255, 0.3);
+  transform-style: preserve-3d;
+  transition: transform 0.3s ease-out;
+  cursor: grab;
+}
+
+.transcend-core-3d:hover {
+  transform: translate(-50%, -50%) scale(1.1);
+  box-shadow: 0 0 120px rgba(255, 255, 255, 0.5);
+}
+
+.transcend-core-3d span {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 300;
+  color: #ffffff;
+}
+
+/* ---- Particle Trail ---- */
+.cursor-trail-particle {
+  position: fixed;
+  width: 4px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9997;
+  transform: translate(-50%, -50%);
+  animation: trailFade 1s ease-out forwards;
+}
+
+@keyframes trailFade {
+  to {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0);
+  }
+}
+
+/* ---- Konami Easter Egg ---- */
+.konami-notification {
+  position: fixed;
+  top: 100px;
+  right: 24px;
+  background: rgba(5, 5, 8, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  padding: 16px 20px;
+  z-index: 10001;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.9rem;
+  color: #fff;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  animation: slideInRight 0.5s var(--ease-out, ease-out);
+  max-width: 320px;
+}
+
+.konami-notification.hide {
+  animation: slideOutRight 0.5s var(--ease-out, ease-out) forwards;
+}
+
+@keyframes slideInRight {
+  from { transform: translateX(120%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideOutRight {
+  to { transform: translateX(120%); opacity: 0; }
+}
+
+.konami-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #fff, rgba(255, 255, 255, 0.3));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+  animation: konamiPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes konamiPulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4); }
+  50% { transform: scale(1.05); box-shadow: 0 0 0 8px rgba(255, 255, 255, 0); }
+}
+
+/* ---- Secret Scene ---- */
+.secret-scene {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: radial-gradient(circle at center, #1a0033 0%, #000000 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.8s ease-out;
+  overflow: hidden;
+}
+
+.secret-scene.active {
+  opacity: 1;
+  pointer-events: auto;
+  animation: secretSceneEnter 1s ease-out;
+}
+
+@keyframes secretSceneEnter {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.secret-stars {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.secret-star {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #fff;
+  animation: starTwinkle 3s ease-in-out infinite;
+}
+
+@keyframes starTwinkle {
+  0%, 100% { opacity: 0.2; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.5); }
+}
+
+.secret-content {
+  position: relative;
+  text-align: center;
+  z-index: 2;
+  padding: 24px;
+  max-width: 600px;
+}
+
+.secret-emoji {
+  font-size: 5rem;
+  margin-bottom: 24px;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+.secret-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 6vw, 4rem);
+  font-weight: 300;
+  background: linear-gradient(135deg, #fff 0%, #ff6b9d 50%, #c084fc 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-bottom: 16px;
+  letter-spacing: 0.05em;
+}
+
+.secret-message {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.8;
+  margin-bottom: 32px;
+}
+
+.secret-message strong {
+  color: #fff;
+  font-weight: 500;
+}
+
+.secret-close {
+  padding: 12px 32px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 100px;
+  color: #fff;
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease-out;
+  font-family: inherit;
+}
+
+.secret-close:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
+}
+
+.secret-rainbow {
+  position: absolute;
+  inset: 0;
+  background: conic-gradient(
+    from 0deg,
+    rgba(255, 0, 0, 0.05),
+    rgba(255, 136, 0, 0.05),
+    rgba(255, 238, 0, 0.05),
+    rgba(0, 255, 68, 0.05),
+    rgba(0, 170, 255, 0.05),
+    rgba(136, 0, 255, 0.05),
+    rgba(255, 0, 0, 0.05)
+  );
+  animation: rainbowRotate 20s linear infinite;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+@keyframes rainbowRotate {
+  to { transform: rotate(360deg); }
+}
+
+/* ---- Achievement Toast ---- */
+.achievement-toast {
+  position: fixed;
+  top: 100px;
+  left: 24px;
+  background: rgba(5, 5, 8, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  border-radius: 16px;
+  padding: 16px 20px;
+  z-index: 10002;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #fff;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  animation: achievementSlide 0.6s var(--ease-spring, cubic-bezier(0.34, 1.56, 0.64, 1));
+  max-width: 320px;
+}
+
+.achievement-toast.hide {
+  animation: achievementSlideOut 0.4s ease-in forwards;
+}
+
+@keyframes achievementSlide {
+  from { transform: translateX(-120%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes achievementSlideOut {
+  to { transform: translateX(-120%); opacity: 0; }
+}
+
+.achievement-icon {
+  font-size: 2rem;
+  filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.6));
+}
+
+.achievement-text small {
+  display: block;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 215, 0, 0.8);
+  margin-bottom: 4px;
+}
+
+.achievement-text strong {
+  display: block;
+  font-size: 0.95rem;
+  color: #fff;
+}
+
+/* ---- Install PWA Prompt ---- */
+.pwa-install-prompt {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: rgba(5, 5, 8, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  padding: 16px 20px;
+  z-index: 10001;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: #fff;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  animation: slideInRight 0.5s var(--ease-out, ease-out);
+  max-width: 340px;
+}
+
+.pwa-install-prompt.hide {
+  animation: slideOutRight 0.5s var(--ease-out, ease-out) forwards;
+}
+
+.pwa-install-text {
+  flex: 1;
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+.pwa-install-text strong {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 0.95rem;
+}
+
+.pwa-install-btn {
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 100px;
+  color: #fff;
+  font-size: 0.8rem;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.3s;
+  white-space: nowrap;
+}
+
+.pwa-install-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.pwa-install-close {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  font-size: 1.2rem;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s;
+}
+
+.pwa-install-close:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .konami-notification,
+  .pwa-install-prompt,
+  .achievement-toast {
+    left: 16px;
+    right: 16px;
+    max-width: none;
+  }
+  .achievement-toast {
+    left: 16px;
+    right: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor-trail-particle,
+  .secret-rainbow,
+  .secret-emoji,
+  .achievement-icon,
+  .konami-icon {
+    animation: none !important;
+  }
+}
