@@ -9,19 +9,26 @@
     <meta name="author" content="LUMEN">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://hongliichun671-lgtm.github.io/lumen-experience/">
-    
+
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#050508">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="LUMEN">
+
     <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="LUMEN — A Journey Through Light">
     <meta property="og:description" content="An immersive interactive experience exploring the nature of light, consciousness, and digital perception.">
     <meta property="og:url" content="https://hongliichun671-lgtm.github.io/lumen-experience/">
     <meta property="og:site_name" content="LUMEN">
-    
+
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="LUMEN — A Journey Through Light">
     <meta name="twitter:description" content="An immersive interactive experience exploring the nature of light, consciousness, and digital perception.">
-    
+
     <!-- Structured Data -->
     <script type="application/ld+json">
     {
@@ -32,18 +39,18 @@
         "description": "An immersive interactive experience exploring the nature of light, consciousness, and digital perception."
     }
     </script>
-    
+
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3CradialGradient id='g' cx='50%25' cy='50%25' r='50%25'%3E%3Cstop offset='0%25' stop-color='%23ffffff'/%3E%3Cstop offset='100%25' stop-color='%23000000'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='16' cy='16' r='14' fill='url(%23g)'/%3E%3C/svg%3E">
-    
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@200;300;400;500&family=Noto+Sans+Khmer:wght@300;400;500;600&display=swap">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@200;300;400;500&family=Noto+Sans+Khmer:wght@300;400;500;600&display=swap" rel="stylesheet">
-    
+
     <link rel="stylesheet" href="css/styles.css">
-    <meta name="theme-color" content="#000000">
+    <link rel="stylesheet" href="css/effects.css">
 </head>
 <body>
     <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -78,7 +85,7 @@
             <button class="lang-btn active" data-lang="en" aria-label="Switch to English">EN</button>
             <button class="lang-btn" data-lang="km" aria-label="Switch to Khmer">ខ្មែរ</button>
             <button class="audio-btn" id="audioToggle" aria-pressed="false" aria-label="Toggle audio">
-                <span class="audio-icon" aria-hidden="true">♫</span>
+                <span class="audio-icon" aria-hidden="true">♪</span>
             </button>
             <button class="audio-btn" id="speechToggle" aria-pressed="false" aria-label="Toggle speech to text" title="Speech to Text">
                 <span class="audio-icon" aria-hidden="true">🎤</span>
@@ -125,10 +132,10 @@
                 <div class="section-label" data-i18n="spectrumLabel">01 — The Spectrum</div>
                 <h2 class="section-title" id="spectrum-title" data-i18n="spectrumTitle">Every color is a <span class="accent">frequency</span> of light.</h2>
                 <p class="section-desc" data-i18n="spectrumDesc">
-                    What you perceive as color is merely your mind interpreting electromagnetic waves. 
+                    What you perceive as color is merely your mind interpreting electromagnetic waves.
                     Move through the spectrum and discover what lies beyond the visible.
                 </p>
-                
+
                 <div class="spectrum-container" role="region" aria-label="Interactive spectrum explorer">
                     <div class="spectrum-bar" role="slider" aria-label="Spectrum wavelength" aria-valuemin="400" aria-valuemax="700" aria-valuenow="550" id="spectrumBar">
                         <div class="spectrum-gradient"></div>
@@ -140,7 +147,7 @@
                         <div class="spectrum-frequency" id="spectrumFrequency" aria-live="polite">545 THz</div>
                     </div>
                 </div>
-                
+
                 <div class="spectrum-cards" role="list">
                     <button class="spectrum-card" role="listitem" data-color="#ff0000" data-name="Red" data-wavelength="~700 nm" data-frequency="428 THz" aria-label="Red, ~700 nm, 428 THz">
                         <div class="spectrum-card-swatch" style="background:#ff0000" aria-hidden="true"></div>
@@ -182,16 +189,16 @@
                 <div class="section-label" data-i18n="consciousnessLabel">02 — Consciousness</div>
                 <h2 class="section-title" id="consciousness-title" data-i18n="consciousnessTitle">The mind is a <span class="accent">luminous</span> field.</h2>
                 <p class="section-desc" data-i18n="consciousnessDesc">
-                    Your consciousness is not a thing, but a process — a continuous flow of perception, 
+                    Your consciousness is not a thing, but a process — a continuous flow of perception,
                     thought, and awareness. Interact with the field below.
                 </p>
-                
+
                 <div class="consciousness-field" id="consciousnessField" role="button" tabindex="0" aria-label="Interactive consciousness field. Click or press Enter to interact">
                     <div class="field-orb" id="fieldOrb" aria-hidden="true"></div>
                     <div class="field-ripple" id="fieldRipple" aria-hidden="true"></div>
                     <div class="field-label" data-i18n="fieldLabel">Touch the field</div>
                 </div>
-                
+
                 <div class="consciousness-stats" role="list">
                     <div class="stat-item" role="listitem">
                         <div class="stat-value" data-count="86" aria-label="86 Billion Neurons">0</div>
@@ -215,10 +222,10 @@
                 <div class="section-label" data-i18n="transcendLabel">03 — Transcendence</div>
                 <h2 class="section-title" id="transcend-title" data-i18n="transcendTitle">Beyond the <span class="accent">visible</span>.</h2>
                 <p class="section-desc" data-i18n="transcendDesc">
-                    There is a universe beyond what your eyes can see. 
+                    There is a universe beyond what your eyes can see.
                     A spectrum of light that exists outside your perception.
                 </p>
-                
+
                 <div class="transcend-visual" aria-hidden="true">
                     <div class="transcend-ring transcend-ring-1"></div>
                     <div class="transcend-ring transcend-ring-2"></div>
@@ -227,7 +234,7 @@
                         <span>∞</span>
                     </div>
                 </div>
-                
+
                 <blockquote class="transcend-quote">
                     "The most beautiful thing we can experience is the mysterious."
                     <span class="quote-author">— Albert Einstein</span>
@@ -263,5 +270,6 @@
     </main>
 
     <script src="js/main.js" defer></script>
+    <script src="js/lumen-extras.js" defer></script>
 </body>
 </html>
