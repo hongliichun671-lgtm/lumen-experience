@@ -1,6 +1,6 @@
 /* ============================================
-   LUMEN — A Journey Through Light
-   Design System
+   LUMEN — Enhanced styles.css with WebGL
+   Updated with 3D integration
    ============================================ */
 
 :root {
@@ -40,6 +40,20 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     cursor: none;
+}
+
+/* WebGL Canvas */
+#webglCanvas {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+#webglCanvas.loaded {
+    opacity: 1;
 }
 
 /* Khmer font support */
@@ -343,17 +357,6 @@ html[lang="km"] .spectrum-frequency {
 }
 
 /* ============================================
-   Canvas Background
-   ============================================ */
-
-#particleCanvas {
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-}
-
-/* ============================================
    Main Content
    ============================================ */
 
@@ -652,12 +655,14 @@ html[lang="km"] .spectrum-frequency {
     text-align: left;
     cursor: pointer;
     transition: transform 0.4s var(--ease-out), border-color 0.4s, box-shadow 0.4s;
+    transform-style: preserve-3d;
 }
 
 .spectrum-card:hover {
-    transform: translateY(-6px);
+    transform: translateY(-8px) translateZ(20px);
     border-color: var(--border-hover);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4),
+                0 0 30px rgba(255, 255, 255, 0.1);
 }
 
 .spectrum-card.active {
@@ -716,11 +721,17 @@ html[lang="km"] .spectrum-frequency {
     opacity: 0;
     transform: scale(0.8);
     transition: opacity 0.8s var(--ease-out) 0.3s, transform 0.8s var(--ease-out) 0.3s;
+    perspective: 1000px;
+    transform-style: preserve-3d;
 }
 
 .scene.visible .consciousness-field {
     opacity: 1;
     transform: scale(1);
+}
+
+.consciousness-field:hover {
+    transform: scale(1.05);
 }
 
 .field-orb {
@@ -731,6 +742,7 @@ html[lang="km"] .spectrum-frequency {
     box-shadow: 0 0 60px rgba(255, 255, 255, 0.3);
     transition: transform 0.3s var(--ease-out), box-shadow 0.3s;
     animation: orbFloat 4s ease-in-out infinite;
+    transform: translateZ(0);
 }
 
 @keyframes orbFloat {
@@ -846,6 +858,12 @@ html[lang="km"] .spectrum-frequency {
     border-radius: 50%;
     border: 1px solid rgba(255, 255, 255, 0.15);
     transform: translate(-50%, -50%);
+    transform-style: preserve-3d;
+    transition: transform 1s ease;
+}
+
+.transcend-ring:hover {
+    transform: scale(1.1) translateZ(10px);
 }
 
 .transcend-ring-1 {
@@ -1062,6 +1080,7 @@ html[lang="km"] .spectrum-frequency {
     .consciousness-field {
         width: 240px;
         height: 240px;
+        perspective: none;
     }
     
     .field-orb {
@@ -1122,5 +1141,13 @@ html[lang="km"] .spectrum-frequency {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
+    }
+    
+    #webglCanvas {
+        opacity: 1;
+    }
+    
+    .spectrum-card, .consciousness-field, .transcend-ring {
+        transform: none !important;
     }
 }
