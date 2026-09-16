@@ -1,0 +1,122 @@
+/* ============================================
+   LUMEN — Enhanced CSS for WebGL 3D
+   ============================================ */
+
+/* WebGL Canvas */
+#webglCanvas {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+#webglCanvas.loaded {
+    opacity: 1;
+}
+
+/* Scene backgrounds with WebGL integration */
+.scene {
+    position: relative;
+    z-index: 1;
+}
+
+.scene::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        circle at center,
+        rgba(255, 255, 255, 0.02) 0%,
+        transparent 70%
+    );
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Enhanced scene transitions */
+.scene.visible::before {
+    animation: fadeGlow 1s ease;
+}
+
+@keyframes fadeGlow {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* 3D hover effects on spectrum cards */
+.spectrum-card {
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+                box-shadow 0.4s ease;
+    transform-style: preserve-3d;
+}
+
+.spectrum-card:hover {
+    transform: translateY(-8px) translateZ(20px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4),
+                0 0 30px rgba(255, 255, 255, 0.1);
+}
+
+/* 3D consciousness field */
+.consciousness-field {
+    perspective: 1000px;
+    transform-style: preserve-3d;
+    transition: transform 0.3s ease;
+}
+
+.consciousness-field:hover {
+    transform: scale(1.05);
+}
+
+.field-orb {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transform: translateZ(0);
+}
+
+/* 3D Transcendence rings */
+.transcend-ring {
+    transform-style: preserve-3d;
+    transition: transform 1s ease;
+}
+
+.transcend-ring:hover {
+    transform: scale(1.1) translateZ(10px);
+}
+
+/* Parallax effect for 3D depth */
+.parallax {
+    transform: translateZ(0);
+    will-change: transform;
+}
+
+/* Loading state */
+.preloader.loaded ~ #webglCanvas {
+    opacity: 1;
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+    #webglCanvas {
+        opacity: 0.7;
+    }
+    
+    .spectrum-card {
+        transform: none !important;
+    }
+    
+    .consciousness-field {
+        perspective: none;
+    }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    #webglCanvas {
+        opacity: 1;
+    }
+    
+    .spectrum-card, .consciousness-field, .transcend-ring {
+        transition: none;
+    }
+}
