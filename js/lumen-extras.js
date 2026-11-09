@@ -1,6 +1,7 @@
 /* ============================================
    LUMEN — Enhanced Features Module
    PWA + Konami Easter Egg + 3D Transcendence
+   + Light Journey Tracker + Time-of-Day Themes
    ============================================ */
 
 (function() {
@@ -174,8 +175,8 @@
       <div class="secret-emoji">🌌</div>
       <h2 class="secret-title" data-en="Beyond the Light" data-km="លើសពីពន្លឺ">Beyond the Light</h2>
       <p class="secret-message">
-        <strong data-en="Welcome, Seeker." data-km="សូមស្វាគមន៍ អ្នកស្វែងរក។">Welcome, Seeker.</strong><br>
-        <span data-en="You've found the path less traveled. The light you see is not the end — it's the beginning of a deeper question: What lies beyond perception?" data-km="អ្នកបានរកឃើញផ្លូវដែលមិនសូវមានអ្នកដើរ។ ពន្លឺដែលអ្នកឃើញមិនមែនជាចុងបញ្ចប់ទេ — វាជាការចាប់ផ្តើមនៃសំណួរដ៏ជ្រាលជ្រៅមួយ៖ តើអ្វីនៅឯបន្ទាល់នៃការយល់ឃើញ?">You've found the path less traveled. The light you see is not the end — it's the beginning of a deeper question: What lies beyond perception?</span>
+        <strong data-en="Welcome, Seeker." data-km="ស្វាគមន៍ អ្នកស្វែងរក។">Welcome, Seeker.</strong><br>
+        <span data-en="You've found the path less traveled. The light you see is not the end — it's the beginning of a deeper question: What lies beyond perception?" data-km="អ្នកបានរកឃើញផ្លូវតិចតួចដែលអ្នកដទៃមិនទាន់បានដើរ។ ពន្លឺដែលអ្នកបានឃើញមិនមែនជាចំណុចបញ្ចប់ទេ — វាជាការចាប់ផ្តើមនៃសំណួរដ៏ជ្រៅជាងនេះ៖ តើមានអ្វីនៅហួសពីការយល់ឃើញ?">You've found the path less traveled. The light you see is not the end — it's the beginning of a deeper question: What lies beyond perception?</span>
       </p>
       <button class="secret-close" id="secretClose" data-en="Return to Light" data-km="ត្រឡប់ទៅរកពន្លឺ">Return to Light</button>
     `;
@@ -189,7 +190,6 @@
     });
 
     // Close handlers
-    document.getElementById = document.getElementById || (() => null);
     setTimeout(() => {
       const closeBtn = content.querySelector('.secret-close');
       if (closeBtn) {
@@ -317,7 +317,7 @@
   }
 
   // ============================================
-  // 5. Time-of-day Theme
+  // 5. Time-of-day Theme (Enhanced)
   // ============================================
   function applyTimeTheme() {
     const hour = new Date().getHours();
@@ -328,15 +328,62 @@
     else theme = 'night';
 
     const themes = {
-      dawn: { primary: '#1a0f1f', accent: '#ff8866' },
-      day: { primary: '#0a1520', accent: '#88ddff' },
-      dusk: { primary: '#1a0a1f', accent: '#ff66aa' },
-      night: { primary: '#050508', accent: '#ffffff' },
-      default: { primary: '#050508', accent: '#ffffff' }
+      dawn: {
+        primary: '#1a0f1f',
+        secondary: '#0f0a16',
+        tertiary: '#1a1220',
+        accent: '#ff8866',
+        accentGlow: 'rgba(255,136,102,0.15)',
+        textSecondary: 'rgba(255,220,210,0.7)',
+        textTertiary: 'rgba(255,220,210,0.4)'
+      },
+      day: {
+        primary: '#0a1520',
+        secondary: '#0d1a28',
+        tertiary: '#101c2c',
+        accent: '#88ddff',
+        accentGlow: 'rgba(136,221,255,0.15)',
+        textSecondary: 'rgba(200,230,255,0.7)',
+        textTertiary: 'rgba(200,230,255,0.4)'
+      },
+      dusk: {
+        primary: '#1a0a1f',
+        secondary: '#150a1a',
+        tertiary: '#201024',
+        accent: '#ff66aa',
+        accentGlow: 'rgba(255,102,170,0.15)',
+        textSecondary: 'rgba(255,200,230,0.7)',
+        textTertiary: 'rgba(255,200,230,0.4)'
+      },
+      night: {
+        primary: '#050508',
+        secondary: '#0a0a12',
+        tertiary: '#10101a',
+        accent: '#ffffff',
+        accentGlow: 'rgba(255,255,255,0.15)',
+        textSecondary: 'rgba(255,255,255,0.6)',
+        textTertiary: 'rgba(255,255,255,0.35)'
+      },
+      default: {
+        primary: '#050508',
+        secondary: '#0a0a12',
+        tertiary: '#10101a',
+        accent: '#ffffff',
+        accentGlow: 'rgba(255,255,255,0.15)',
+        textSecondary: 'rgba(255,255,255,0.6)',
+        textTertiary: 'rgba(255,255,255,0.35)'
+      }
     };
 
     const t = themes[theme];
-    document.documentElement.style.setProperty('--bg-primary', t.primary);
+    const root = document.documentElement.style;
+    root.setProperty('--bg-primary', t.primary);
+    root.setProperty('--bg-secondary', t.secondary);
+    root.setProperty('--bg-tertiary', t.tertiary);
+    root.setProperty('--accent', t.accent);
+    root.setProperty('--accent-glow', t.accentGlow);
+    root.setProperty('--text-secondary', t.textSecondary);
+    root.setProperty('--text-tertiary', t.textTertiary);
     document.documentElement.dataset.timeTheme = theme;
   }
   applyTimeTheme();
@@ -348,7 +395,6 @@
     const transcend = document.querySelector('.transcend-visual');
     if (!transcend) return;
 
-    // Wrap rings in 3D container
     const existingRings = transcend.querySelectorAll('.transcend-ring');
     const existingCore = transcend.querySelector('.transcend-core');
 
@@ -367,7 +413,6 @@
       ring.style.animation = 'none';
       ring.style.transform = `translate(-50%, -50%) rotateX(${angleX}deg) rotateY(${angleY}deg)`;
 
-      // Add orbiting particle
       const orbit = document.createElement('div');
       orbit.className = 'ring-orbit';
       orbit.style.animation = `ringOrbit${i} ${10 + i * 5}s linear infinite`;
@@ -375,7 +420,6 @@
       ring.appendChild(orbit);
     });
 
-    // Add orbit keyframes
     if (!document.getElementById('orbitKeyframes')) {
       const style = document.createElement('style');
       style.id = 'orbitKeyframes';
@@ -396,7 +440,6 @@
       document.head.appendChild(style);
     }
 
-    // Move rings into 3D container
     existingRings.forEach(r => container3d.appendChild(r));
     transcend.appendChild(container3d);
 
@@ -405,7 +448,6 @@
       container3d.appendChild(existingCore);
     }
 
-    // Mouse-reactive 3D tilt
     const isCoarse = window.matchMedia('(pointer: coarse)').matches;
     if (!isCoarse) {
       let targetRotX = 0, targetRotY = 0;
@@ -426,7 +468,6 @@
         currentRotY += (targetRotY - currentRotY) * 0.08;
         container3d.style.transform = `rotateX(${currentRotX}deg) rotateY(${currentRotY}deg)`;
 
-        // Update ring orientations with mouse
         existingRings.forEach(ring => {
           const bx = parseFloat(ring.dataset.baseRotateX);
           const by = parseFloat(ring.dataset.baseRotateY);
@@ -442,25 +483,102 @@
     }
   }
 
-  // Run upgrades after DOM is ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => setTimeout(upgradeTranscendence, 100));
-  } else {
-    setTimeout(upgradeTranscendence, 100);
+  // ============================================
+  // 7. Light Journey Progress Tracker
+  // ============================================
+  function initJourneyTracker() {
+    if (document.getElementById('journeyTracker')) return;
+
+    const scenes = document.querySelectorAll('.scene');
+    if (scenes.length === 0) return;
+
+    const tracker = document.createElement('div');
+    tracker.id = 'journeyTracker';
+    tracker.className = 'journey-tracker';
+    tracker.setAttribute('aria-label', 'Journey progress');
+
+    const label = document.createElement('div');
+    label.className = 'journey-label';
+    label.innerHTML = '<span class="journey-label-icon">✦</span><span class="journey-label-text">Journey</span>';
+    tracker.appendChild(label);
+
+    const dots = document.createElement('div');
+    dots.className = 'journey-dots';
+
+    const dotEls = [];
+    scenes.forEach((scene, i) => {
+      const dot = document.createElement('button');
+      dot.className = 'journey-dot';
+      dot.setAttribute('aria-label', `Scene ${i + 1}`);
+      dot.dataset.index = i;
+      dot.addEventListener('click', () => {
+        scene.scrollIntoView({ behavior: 'smooth' });
+      });
+      dots.appendChild(dot);
+      dotEls.push(dot);
+    });
+    tracker.appendChild(dots);
+
+    const counter = document.createElement('div');
+    counter.className = 'journey-counter';
+    counter.textContent = '0/' + scenes.length;
+    tracker.appendChild(counter);
+
+    document.body.appendChild(tracker);
+
+    // Show tracker after a short delay
+    setTimeout(() => tracker.classList.add('visible'), 1500);
+
+    // Observe scenes
+    let visited = 0;
+    const journeyObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const idx = Array.from(scenes).indexOf(entry.target);
+          if (idx >= 0 && !dotEls[idx].classList.contains('visited')) {
+            dotEls[idx].classList.add('visited');
+            visited++;
+            counter.textContent = visited + '/' + scenes.length;
+
+            if (visited === scenes.length) {
+              setTimeout(() => unlockAchievement('journey-complete', '🌟', 'Journey Complete', 'You traversed the full spectrum of light'), 600);
+            }
+          }
+        }
+      });
+    }, { threshold: 0.4 });
+
+    scenes.forEach(s => journeyObserver.observe(s));
   }
 
   // ============================================
-  // 7. Expose debug API (for development)
+  // 8. Run DOM-dependent initializations
+  // ============================================
+  function onReady(fn) {
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', fn);
+    } else {
+      fn();
+    }
+  }
+
+  onReady(() => {
+    setTimeout(upgradeTranscendence, 100);
+    setTimeout(initJourneyTracker, 100);
+  });
+
+  // ============================================
+  // 9. Expose debug API (for development)
   // ============================================
   window.LUMEN = {
     unlockAchievement,
     showSecretScene,
     triggerKonami: triggerKonamiEasterEgg,
     achievements: () => achievements,
-    version: '1.1.0'
+    version: '1.2.0'
   };
 
-  console.log('%c✨ LUMEN v1.1.0', 'color: #fff; font-size: 16px; font-weight: bold;');
+  console.log('%c✨ LUMEN v1.2.0', 'color: #fff; font-size: 16px; font-weight: bold;');
   console.log('%cTry the Konami Code: ↑ ↑ ↓ ↓ ← → ← → B A', 'color: rgba(255,255,255,0.6); font-size: 12px;');
   console.log('%cWindow.LUMEN API available for debugging', 'color: rgba(255,255,255,0.4); font-size: 11px;');
 
